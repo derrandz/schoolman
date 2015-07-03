@@ -10,7 +10,9 @@
         "laravelcollective/html": "~5.0",
         "enyo/dropzone": "*",
         "maatwebsite/excel": "~2.0.0",
-        "caouecs/laravel4-lang": "~2.0"
+        "caouecs/laravel4-lang": "~2.0",
+        "twitter/bootstrap": "dev-master",
+        "components/jquery": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -28,7 +30,7 @@
             "App\\": "app/"
         },
         "files" : [
-            "app/Helpers/helper_methods.php"
+            "app/Helpers/helpers.php"
         ]
     },
     "autoload-dev": {

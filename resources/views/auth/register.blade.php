@@ -1,42 +1,7 @@
 <!-- resources/views/auth/register.blade.php -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.main')
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
+    @section('content')
         <div class="container">
             <div class="content">
                 <div class="title">Login Page</div>
@@ -45,33 +10,32 @@
                <form method="POST" action="/auth/register">
                     {!! csrf_field() !!}
 
+                    <div class="form-groups">
+                        <div class="form-label"> Name </div>
+                        <input class="form-controls" type="text" name="name" value="{{ old('name') }}">
+                    </div>
+
+                    <div class="form-groups">
+                        <div class="form-label"> Email</div>
+                        <input class="form-controls" type="email" name="email" value="{{ old('email') }}">
+                    </div>
+
+                    <div class="form-groups">
+                        <div class="form-label"> Password </div>
+                        <input class="form-controls" type="password" name="password">
+                    </div>
+
                     <div class="col-md-6">
-                        Name
-                        <input type="text" name="name" value="{{ old('name') }}">
+                        <div class="form-label"> Confirm Password </div>
+                        <input class="form-controls" type="password" name="password_confirmation">
                     </div>
 
-                    <div>
-                        Email
-                        <input type="email" name="email" value="{{ old('email') }}">
-                    </div>
-
-                    <div>
-                        Password
-                        <input type="password" name="password">
-                    </div>
-
-                    <div class="col-md-6">
-                        Confirm Password
-                        <input type="password" name="password_confirmation">
-                    </div>
-
-                    <div>
+                    <div class="form-groups">
                         <button type="submit">Register</button>
                     </div>
                 </form>
             </div>
         </div>
-    </body>
-</html>
+@stop
 
 

@@ -1,45 +1,10 @@
 <!-- resources/views/auth/login.blade.php -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.main')
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
+@section('content')
+        <div class="container-fluid">
             <div class="content">
-                <div class="title">Login Page</div>
+                <h1>Login Page</h1>
             </div>
             <div class="content">
                 @if (count($errors) > 0)
@@ -55,28 +20,28 @@
                 <form method="POST" action="/auth/login">
                     {!! csrf_field() !!}
 
-                    <div>
-                        Email
-                        <input type="email" name="email" value="{{ old('email') }}">
+                    <div class="form-groups">
+                        <div class="form-label"> Email</div>
+                        <input class="form-control" type="email" name="email" value="{{ old('email') }}">
                     </div>
 
-                    <div>
-                        Password
-                        <input type="password" name="password" id="password">
+                    <div class="form-groups">
+                        <div class="form-label">Password</div>
+                        <input class="form-control" type="password" name="password" id="password">
                     </div>
 
-                    <div>
+                    <div class="form-groups">
                         <input type="checkbox" name="remember"> Remember Me
                     </div>
 
-                    <div>
+                    <div class="form-groups">
                         <button type="submit">Login</button>
+                        &nbsp;Or&nbsp;<a href="/auth/register">Sign Up</a>
                     </div>
                 </form>
 
             </div>
         </div>
-    </body>
-</html>
+@stop
 
 

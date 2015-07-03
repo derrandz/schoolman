@@ -1,44 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel File Upload</title>
+<!-- resources/views/auth/create.blade.php -->
+@extends('layouts.main')
+        
+    @section('content')
+    <script src="{{ URL::asset('vendor/dropzone/dist/dropzone.js') }}"></script>
+    <link rel="stylesheet" href="{{asset("vendor/dropzone/dist/min/dropzone.min.css")}}" media="all">
 
-        <!-- <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css"> -->
-        <script src="{{ URL::asset('vendor/dropzone/dist/dropzone.js') }}"></script>
-        <link rel="stylesheet" href="{{asset("vendor/dropzone/dist/min/dropzone.min.css")}}" media="all">
 
-        <style>
-
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
         <div class="container">
             <div class="content">
                 <div class="title">Records Create Page</div>
@@ -61,17 +28,18 @@
             </div>
         </div>
 
-    <script>
+<script>
+
 Dropzone.options.myAwesomeDropzone = 
 {
 
-autoProcessQueue: true,
-acceptedFiles: ".xls,.csv,.ods",
-addRemoveFiles: true,
-dictCancelUpload: 'Canceled',
+  autoProcessQueue: true,
+  acceptedFiles: ".xls,.csv,.ods",
+  addRemoveFiles: true,
+  dictCancelUpload: 'Canceled',
 
-    init: function() 
-    {
+      init: function() 
+      {
 
           var submitButton = document.querySelector("#submit-all")
           myDropzone = this; // closure
@@ -86,10 +54,10 @@ dictCancelUpload: 'Canceled',
           // Show submit button here and/or inform user to click it.
           });
 
-    }
+      }
+
 };
 
-    </script>
+</script>
     
-    </body>
-</html>
+  @stop

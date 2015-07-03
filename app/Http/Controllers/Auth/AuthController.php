@@ -11,7 +11,7 @@ use Request;
 class AuthController extends Controller
 {
 
-    protected $redirectPath = 'authentication.dashboard';
+    protected $redirectPath = '/dashboard';
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -32,7 +32,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+
+        // $this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**
@@ -63,5 +64,10 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function getDashboard()
+    {
+        return view('auth.dashboard');
     }
 }

@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 // Controllers RESTful routes...
-Route::resource('uploaded_files', 'UploadedFilesController');
+Route::resource('files', 'FilesController');
 
-// Authentication routes...
+// // Authentication routes...
 Route::get('auth/login', ['as' => 'auth.login',
 						  'uses' => 'Auth\AuthController@getLogin']
 						  );
@@ -31,7 +31,7 @@ Route::get('auth/logout', ['as' => 'auth.logout',
 						  'uses' => 'Auth\AuthController@getLogout']
 						  );
 
-Route::get('auth/dashboard', ['as' => 'auth.dashboard',
+Route::get('/dashboard', ['as' => 'auth.dashboard',
 							  'uses' => 'Auth\AuthController@getDashboard']
 							  );
 

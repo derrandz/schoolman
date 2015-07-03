@@ -36,7 +36,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function files()
     {
-        return $this->hasMany('UploadedFile');
+        return $this->hasMany('File');
+    }
+
+    public function auth_creates_file($array)
+    {
+        $file = new $this->files([
+                        'name' => $array[0],
+                        'path' => $array[1].'/'.$array[0],
+                        'description' => $array[2]
+                        ]);
+
+        $is_file_saved = $file->save();
+
+        if( !$is_file_saved )
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
 }

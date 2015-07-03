@@ -143,8 +143,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\DropZoneServiceProvider::class,
-        App\Providers\ModelsServiceProvider::class,
+        App\Providers\ModelsServiceProvider::class, 
 
         /*
         *
@@ -206,6 +205,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Helper' => 'App\Helpers\helpers'
 
     ],
 
