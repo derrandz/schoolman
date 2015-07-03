@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/error', function () {
+	return view('errors.503');
+});
+
 // Controllers RESTful routes...
 Route::resource('files', 'FilesController');
 

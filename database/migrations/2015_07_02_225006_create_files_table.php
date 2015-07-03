@@ -17,6 +17,7 @@ class CreateFilesTable extends Migration
             $table->string('name');
             $table->integer('user_id')->unsigned();
             $table->string('extension');
+            $table->decimal('size');
             $table->string('path');
             $table->string('description');
             $table->timestamps('uploaded_at');
@@ -35,6 +36,8 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('files');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('files');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -9,7 +9,7 @@ class Student extends Model
  
 	protected $table = "students";
 
-    protected $fillable = ['name', 'age', 'grade'];
+    protected $fillable = ['name', 'age', 'grade', 'file_id'];
 
     public function file()
     {

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -153,6 +153,7 @@ return [
         */
         'Collective\Html\HtmlServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 
     ],
 
@@ -205,8 +206,8 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
-        'Helper' => 'App\Helpers\helpers'
-
+        'Helper' => 'App\Helpers\helpers',
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
     ],
 
 ];

@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
     @section('content')
-        <div class="container">
+        <div class="container-fluid">
             <div class="content">
                 <div class="title">Login Page</div>
             </div>
@@ -25,7 +25,7 @@
                         <input class="form-controls" type="password" name="password">
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="form-groups">
                         <div class="form-label"> Confirm Password </div>
                         <input class="form-controls" type="password" name="password_confirmation">
                     </div>
@@ -36,6 +36,6 @@
                 </form>
             </div>
         </div>
-@stop
+    @stop
 
 

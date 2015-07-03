@@ -8,25 +8,11 @@ use Excel;
 class File extends Model
 {
     
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'files';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name', 'extension', 'path', 'description'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    protected $fillable = ['name', 'extension', 'size', 'path', 'description', 'user_id'];
+
 
     public function user()
     {
@@ -40,21 +26,22 @@ class File extends Model
 
     public function create_students()
     {
-
         $my_file = Excel::load($this->path);
         $results = $my_file->get();
 
+        echo('found');
+        
         foreach($results as $sheets)
         {
             foreach($sheets as $row)
             {
                 $student = new Student([
-                    'name' => $row['name'],
-                    'age' => $row['age'],
+                    'name'  => $row['name'],
+                    'age'   => $row['age'],
                     'grade' => $row['grade'],
                 ]);
 
-                if(!$student->save())
+                if( !$this->students()->save($student) )
                 {
                     return false;
                 }

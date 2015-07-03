@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Models\File;
-use Input;
+use Auth;
 use File;
+Use User;
+Use Student;
+use Input;
 use Response;
 use Excel;
 use View;
@@ -23,15 +25,15 @@ class FilesController extends Controller
 
         public function index()
         {
-            $files = File::all();
-            return view('uploaded_files.index', ['files' => $uploaded_files]);
+            $files = current_user()->files;
+            return view('files.index', ['files' => $files]);
         }
 
 
 
         public function create()
         {
-           return view('uploaded_files.create');
+           return view('files.create');
         }
 
         public function store(Request $request)
@@ -45,25 +47,34 @@ class FilesController extends Controller
                 {
                     if ( $file->isValid() )
                     {
-                        $extension = $file->getExtension();
+                        $size = $file->getClientSize();
+                        $extension = $file->guessExtension();
+                        $filename = 'file_uploaded_at_'.time().'_'.$file->getClientOriginalName();
                         $destinationPath = public_path().'/uploads'.'/file_upload_'.time();
-                        $filename = 'file_uploaded_at_'.time().$file->getClientOriginalName();
+                        $fullPath = $destinationPath.'/'.$filename;
+                        $description = 'This should be description';
+                        //Moving the file to the actual upload folders
                         $file->move($destinationPath, $filename);
 
-                        //Create an record of the file in the database.
-                        
-                        if( $uploaded_file->create_students() )
-                        {
-                            return Response::json(['upload' => 'success', 'population' => 'success']);
-                        }
-                        else
-                        {
-                            return Response::json(['upload' => 'success', 'population' => 'failure']);
-                        }
+                        /* 
+                        | 
+                        |////////////////////////////////////////
+                        | User::create_file($name, $extension, $size, $path, $description) /////////////
+                        |///////////////////////////////////////
+                        |
+                        |This Method returns the id of that newly created file in case of success, otherwise it returns false.
+                        |
+                        |
+                        */
+                        $id = current_user()->create_file($filename, $extension, $size, $fullPath, $description);
+                        $my_file = File::find($id);
+                        $my_file->create_students();
+                        return Response::json("Success", 200);
+
                     }
                     else
                     {
-                        return Response::json(['upload' => 'failure', 'population' => 'failure']);    
+                        return Reponse::json('The upload is not valid', 500);
                     }
                 }
             }
@@ -114,5 +125,4 @@ class FilesController extends Controller
         {
             //
         }
-
 }

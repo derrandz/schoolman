@@ -1,3 +1,13 @@
+ <?php
+use DebugBar\StandardDebugBar;
+
+$debugbar = new StandardDebugBar();
+$debugbarRenderer = $debugbar->getJavascriptRenderer();
+
+$debugbar["messages"]->addMessage("hello world!");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +30,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+     <?php echo $debugbarRenderer->renderHead(); ?>
   </head>
 
   <body>
@@ -35,6 +47,7 @@
             </div>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+             <?php echo $debugbarRenderer->render(); ?>
               @yield('content')
             </div>
 
@@ -47,6 +60,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="/vendor/twitter-bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
   </body>
 </html>
