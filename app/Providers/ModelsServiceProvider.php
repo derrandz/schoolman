@@ -30,7 +30,7 @@ class ModelsServiceProvider extends ServiceProvider
             $loader->alias('User', 'App\Http\Models\User');
             $loader->alias('App\User','User');
             $loader->alias('Student', 'App\Http\Models\Student');
-
+            $loader->alias('Organism', 'App\Http\Models\Organism');            
         });
     }
 
