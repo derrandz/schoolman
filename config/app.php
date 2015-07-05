@@ -144,7 +144,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ModelsServiceProvider::class, 
-        App\Providers\DbConnectionsServiceProvider::class, 
 
         /*
         *

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+
 class ModelsServiceProvider extends ServiceProvider
 {
     /**
@@ -29,8 +30,11 @@ class ModelsServiceProvider extends ServiceProvider
             $loader->alias('File', 'App\Http\Models\File');
             $loader->alias('User', 'App\Http\Models\User');
             $loader->alias('App\User','User');
-            $loader->alias('Student', 'App\Http\Models\Student');
-            $loader->alias('Organism', 'App\Http\Models\Organism');            
+            $loader->alias('Student', 'App\Http\Models\Student');             
+            $loader->alias('OrganismSetup', 'App\Http\Models\OrganismSetup');
+            $loader->alias('Organism', 'App\Http\Models\Organism'); 
+            $loader->alias('Database', 'App\Http\Models\Database');                           
+
         });
     }
 

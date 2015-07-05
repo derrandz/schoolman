@@ -27,6 +27,8 @@ class CreateOrganismsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('organisms');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('organisms');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
