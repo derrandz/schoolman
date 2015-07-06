@@ -1,7 +1,5 @@
 <!-- resources/views/auth/show.blade.php -->
 <!DOCTYPE html>
-        @extends('layouts.main')
-        @extends('layouts.main')
 @extends('layouts.main')
 
     @section('content')

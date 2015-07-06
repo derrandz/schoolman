@@ -13,8 +13,6 @@ class Database extends Model
 
 	protected $fillable = ['name', 'organism_id'];
 
-	protected $connection;
-
 	/**
 	* Eloquent Relationshis.
 	*
@@ -35,38 +33,17 @@ class Database extends Model
 		$mysql_query = 'CREATE DATABASE '.$this->name;
 		DB::statement($mysql_query);
 	}
-
-	public function create_connection($options = null)
-	{
-		configureConnectionByName($options); //Helper
-
-	}
-
+	
 	public function connect($options = null)
 	{
-		$database = $this->name;
-		// Figure out the driver and get the default configuration for the driver
-		$driver  = isset($options['driver']) ? $options['driver'] : Config::get("database.default");
-		$default = Config::get("database.connections.$driver");
+		$connection = new ConnectionCFG(['database' => $this->name,]);
 
-		// Loop through our default array and update options if we have non-defaults
-		foreach($default as $item => $value)
-		{
-			$default[$item] = isset($options[$item]) ? $options[$item] : $default[$item];
-		}
-
-		// Set the temporary configuration
-		Config::set("database.connections.$database", $default);
-
-		// Create the connection
-		$this->connection = DB::connection($database);
-
-		echo 'connection to database '.$database.' has been established';
+		return $connection;
 	}
 
 	public function establish_connection($options = null)
 	{
-		$this->connect($options);
+		return $this->connect($options);
 	}
 
 	/**
@@ -76,7 +53,7 @@ class Database extends Model
 	 */
 	public function connection()
 	{
-		return $this->connection;
+		return $this->connect();
 	}
 
 	/**
@@ -87,7 +64,7 @@ class Database extends Model
 	 */
 	public function table($table = null)
 	{
-		return $this->getConnection()->table($table);
+		return $this->connection()->getTable($table);
 	}
 
 }

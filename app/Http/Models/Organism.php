@@ -24,12 +24,7 @@ class Organism extends Model
     public function connect_to_database()
     {
     	$database = $this->database;
-		$database->establish_connection([ 
-			'driver'   => 'mysql',
-		    'database' => $database->name,
-            // 'username' => 'fpuser1',
-            // 'password' => 'mypassword',
-		    ]);
+		return $database->establish_connection();
     } 
 
     public function run_migrations()
@@ -42,6 +37,22 @@ class Organism extends Model
                             '--path'     => 'database/migrations/tenants'
                         ]);
         return [$migrate_install, $migrations];
+    }
+
+    public function table($table)
+    {
+        $connection = $this->database->connect();
+        return $this->database->table($table);
+    }
+
+    public function users()
+    {
+        return $this->table('users');
+    }
+
+    public function students()
+    {
+        return $this->table('students');
     }
 
 }

@@ -34,6 +34,7 @@ class ModelsServiceProvider extends ServiceProvider
             $loader->alias('OrganismSetup', 'App\Http\Models\OrganismSetup');
             $loader->alias('Organism', 'App\Http\Models\Organism'); 
             $loader->alias('Database', 'App\Http\Models\Database');                           
+            $loader->alias('ConnectionCFG', 'App\Http\Models\ConnectionCFG');                           
 
         });
     }
