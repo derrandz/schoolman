@@ -10,12 +10,12 @@ class OrganismSetup
 	protected $org;
     protected $name;
     protected $code;
-    protected $plug;
+    protected $connect;
 
 
     public static function create($params)
     {
-    	$instance = new static($params['name'], $params['code'], $params['plug']);
+    	$instance = new static($params['name'], $params['code'], $params['connect']);
     	
         $instance->setup();
 
@@ -23,31 +23,36 @@ class OrganismSetup
     }
 
 
-    public function __construct($name, $code, $plug)
+    public function __construct($name, $code, $connect)
     {
     	
     	$this->name = $name;
     	$this->code = $code;
-        $this->plug = $plug;
+        $this->connect = $connect;
 
     }
 
     public function setup()
     {
     	$this->create_organism();
-    	
-        if($this->plug)
+
+        if(!($this->connect))
         {
-            $this->create_db_and_connect();
+            $this->create_db();
+            $this->reset_default_db_config();
         }
         else
         {
-            $this->create_db();
+            $this->create_db_and_connect();
+            $this->run_migrations();
         }
 
-    	$this->run_migrations();
-
     	return $this->org;
+    }
+
+    public function reset_default_db_config()
+    {
+        $this->org->set_default_db_config();
     }
 
     public function create_organism()
@@ -64,11 +69,14 @@ class OrganismSetup
         $this->org->create_database(array('name' => $db_name,));
     }
 
+    public function configure_database()
+    {
+        return $this->org->configure_database();
+    }
 
 	public function create_db_and_connect()
 	{
-		$db_name = 'database_of_'.(str_replace(" ","_",$this->name));
-		$this->org->create_database(array('name' => $db_name,));
+		$this->create_db();
 		$this->org->connect_to_database();
 	}
 

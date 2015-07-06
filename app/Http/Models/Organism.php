@@ -4,6 +4,7 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Artisan;
+use Config;
 
 class Organism extends Model
 {
@@ -27,16 +28,33 @@ class Organism extends Model
 		return $database->establish_connection();
     } 
 
+    public function set_default_db_config()
+    {
+        $connection = new ConnectionCFG(); //Sets the default database connection;
+    }
+
     public function run_migrations()
     {
         $migrate_install = Artisan::call('migrate:install', [
             '--database' => $this->database->name,
             ]);
-        $migrations = Artisan::call('migrate', [
+        return $this->migrate();
+    }
+
+    public function rollback_migrations()
+    {
+        return Artisan::call('migrate:rollback', [
                             '--database' => $this->database->name,
                             '--path'     => 'database/migrations/tenants'
                         ]);
-        return [$migrate_install, $migrations];
+    }
+
+    public function migrate()
+    {
+        return Artisan::call('migrate', [
+                            '--database' => $this->database->name,
+                            '--path'     => 'database/migrations/tenants'
+                        ]);
     }
 
     public function table($table)

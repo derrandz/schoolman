@@ -1,13 +1,3 @@
- <?php
-use DebugBar\StandardDebugBar;
-
-$debugbar = new StandardDebugBar();
-$debugbarRenderer = $debugbar->getJavascriptRenderer();
-
-$debugbar["messages"]->addMessage("hello world!");
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +9,7 @@ $debugbar["messages"]->addMessage("hello world!");
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Dashboard for Organisations</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/vendor/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +21,6 @@ $debugbar["messages"]->addMessage("hello world!");
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-     <?php echo $debugbarRenderer->renderHead(); ?>
   </head>
 
   <body>
@@ -47,7 +36,13 @@ $debugbar["messages"]->addMessage("hello world!");
             </div>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-             <?php echo $debugbarRenderer->render(); ?>
+            @include('layouts.flash_messages')
+             <div class="row"
+               
+               <p>Current databse <strong style="color:green;"><?php print_r( DB::connection()->getDatabaseName() ) ?></strong></p> 
+               <!-- <p>Change Database</p>{!! Form::select("number", databases(), null, ["class" => "field"]) !!}; -->
+
+             </div>
               @yield('content')
             </div>
 

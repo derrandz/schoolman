@@ -21,6 +21,7 @@ Route::get('/error', function () {
 
 // Controllers RESTful routes...
 Route::resource('files', 'FilesController');
+Route::resource('organisms', 'OrganismsController');
 
 // // Authentication routes...
 Route::get('auth/login', ['as' => 'auth.login',

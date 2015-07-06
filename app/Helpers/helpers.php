@@ -48,3 +48,27 @@ function configureConnectionByName($params)
     App::make('config')->set('database.connections.'.$params['database'], $newConnection);
 
 }
+
+function databases()
+{
+    $list = array();
+
+    if(DB::connection()->getDatabaseName() == 'files_platform_db')
+    {
+            foreach(Organism::all() as $org)
+            {
+                $list[] = 'database_of_'.(str_replace(' ', '_', $org->name));
+            }
+    }
+    else
+    {
+        $databases= DB::connection('mysql')->table('database_instances')->get();
+
+        foreach($databases as $db)
+        {
+            $list[] = 'database_of_'.(str_replace(' ', '_', $db->name));
+        }
+    }
+
+    return $list;
+}
