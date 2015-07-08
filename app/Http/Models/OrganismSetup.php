@@ -26,8 +26,8 @@ class OrganismSetup
     public function __construct($name, $code, $connect)
     {
     	
-    	$this->name = $name;
-    	$this->code = $code;
+        $this->name    = $name;
+        $this->code    = $code;
         $this->connect = $connect;
 
     }

@@ -15,6 +15,7 @@
                                       'enctype' => 'multipart/form-data',
                                       'files' => true]) 
                     !!}
+                    {!! csrf_field() !!}
                     
                       <div class="dropzone-previews"></div>
 

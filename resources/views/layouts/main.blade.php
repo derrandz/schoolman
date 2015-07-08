@@ -37,13 +37,10 @@
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             @include('layouts.flash_messages')
-             <div class="row"
-               
-               <p>Current databse <strong style="color:green;"><?php print_r( DB::connection()->getDatabaseName() ) ?></strong></p> 
-               <!-- <p>Change Database</p>{!! Form::select("number", databases(), null, ["class" => "field"]) !!}; -->
-
+             <div class="row">
+                @include('layouts.database_controls')
+                @yield('content')
              </div>
-              @yield('content')
             </div>
 
       </div>

@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use OrganismSetup;
+
 use Organism;
-use Response;
-use Session;
+use User;
+use Teacher;
 
 class OrganismsController extends Controller
 {
@@ -46,7 +46,7 @@ class OrganismsController extends Controller
         $name = $request->input('name');
         $code = $request->input('code');
 
-        if ( !(OrganismSetup::create(['name' => $name, 'code' => $code, 'connect' => false])) )
+        if ( !(OrganismSetup::create(['name' => $name, 'code' => $code, 'connect' => true])) )
         {
             Session::flash('failure', 'This is a message!'); 
             return view('organisms.index', ['orgs' => $orgs]);
@@ -64,9 +64,13 @@ class OrganismsController extends Controller
      */
     public function show($id)
     {
-        $org = Organism::find($id);
+        $database_name = Organism::find($id)->database->name;
 
-        return view('organisms.show', ['org' => $org]);
+        $this->set_database($database_name);
+
+        $users = User::all();
+        $teachers = Teacher::all();
+        return view('organisms.show', ['users' => $users, 'teachers' => $teachers]);
     }
 
     /**

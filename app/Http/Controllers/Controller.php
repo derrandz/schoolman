@@ -8,6 +8,10 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Auth;
 use Session;
 use Redirect;
+use DatabaseConnection;
+use OrganismSetup;
+use Response;
+use Teacher;
 
 abstract class Controller extends BaseController
 {
@@ -21,5 +25,10 @@ abstract class Controller extends BaseController
     		Session::flash('flash_type', 'alert-warning');
     		return Redirect::to('auth/login');
     	}
+    }
+
+    public function set_database($database_name)
+    {
+        $database_connection = new DatabaseConnection(['database' => $database_name]);
     }
 }

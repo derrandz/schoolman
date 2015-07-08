@@ -21,7 +21,7 @@
                       <tbody>
                         @foreach($orgs as $org)
                         <tr>
-                          <td><?= $org->id?></td>
+                          <td>{!! Html::linkRoute('organisms.show', $org->id, array('id' => $org->id ) ) !!}</td>
                           <td><?= $org->name?></td>
                           <td><?= $org->code?></td>
                           <td>

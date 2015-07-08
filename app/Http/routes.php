@@ -19,6 +19,22 @@ Route::get('/error', function () {
 	return view('errors.503');
 });
 
+
+Route::get('/switch_db/{database_name}', [ 'as' => 'switch.database', 'uses' => function($database_name){
+
+	/**
+	* function connect_to_database()
+	*
+	* @var $params (array of database connection configuration. If unset, the default configuration is taken.)
+	* @return String : Capsule::MySQLConnection::getDatabaseName()
+	*/
+
+	$database = connect_to_database(['database' => $database_name]);
+	return 'We are connection to '.$database;
+	
+}]);
+
+
 // Controllers RESTful routes...
 Route::resource('files', 'FilesController');
 Route::resource('organisms', 'OrganismsController');

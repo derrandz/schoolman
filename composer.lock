@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee2d1af3b54b6a5d5f439b9012f5230c",
+    "hash": "ba1f8e7b0ad59eadf1a507a5b49baf5c",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -62,16 +62,16 @@
         },
         {
             "name": "caouecs/laravel4-lang",
-            "version": "2.0.10",
+            "version": "2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caouecs/Laravel-lang.git",
-                "reference": "db465f9e3430edd2951d92eae4dfbcfd7fac0d77"
+                "reference": "056fadd76a965d62f8a41d5a734e95b848fb5f9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/db465f9e3430edd2951d92eae4dfbcfd7fac0d77",
-                "reference": "db465f9e3430edd2951d92eae4dfbcfd7fac0d77",
+                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/056fadd76a965d62f8a41d5a734e95b848fb5f9a",
+                "reference": "056fadd76a965d62f8a41d5a734e95b848fb5f9a",
                 "shasum": ""
             },
             "suggest": {
@@ -95,7 +95,7 @@
                 "laravel",
                 "lpm"
             ],
-            "time": "2015-07-04 23:01:27"
+            "time": "2015-07-07 07:39:45"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -710,31 +710,27 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "56862959b45131ad33e5a7727a25db19f2cf090b"
+                "reference": "f70cf7d229b9f96a076b74b20c31f1762c8ef9dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/56862959b45131ad33e5a7727a25db19f2cf090b",
-                "reference": "56862959b45131ad33e5a7727a25db19f2cf090b",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f70cf7d229b9f96a076b74b20c31f1762c8ef9dc",
+                "reference": "f70cf7d229b9f96a076b74b20c31f1762c8ef9dc",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
                 "ext-fileinfo": "*",
-                "league/phpunit-coverage-listener": "~1.1",
                 "mockery/mockery": "~0.9",
-                "phpspec/phpspec": "~2.0",
+                "phpspec/phpspec": "^2.2",
                 "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "predis/predis": "~1.0",
-                "tedivm/stash": "~0.12.0"
+                "phpunit/phpunit": "~4.1"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -748,8 +744,7 @@
                 "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
                 "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
                 "league/flysystem-webdav": "Allows you to use WebDAV storage",
-                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter",
-                "predis/predis": "Allows you to use Predis for caching"
+                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
             },
             "type": "library",
             "extra": {
@@ -772,10 +767,11 @@
                     "email": "info@frenky.net"
                 }
             ],
-            "description": "Many filesystems, one API.",
+            "description": "Filesystem abstraction: Many filesystems, one API.",
             "keywords": [
                 "Cloud Files",
                 "WebDAV",
+                "abstraction",
                 "aws",
                 "cloud",
                 "copy.com",
@@ -783,6 +779,7 @@
                 "file systems",
                 "files",
                 "filesystem",
+                "filesystems",
                 "ftp",
                 "rackspace",
                 "remote",
@@ -790,7 +787,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-06-07 21:27:37"
+            "time": "2015-07-08 12:45:24"
         },
         {
             "name": "maatwebsite/excel",
@@ -2102,12 +2099,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "f300f03f809eaf8bf64785edcc869c6412dfb9ca"
+                "reference": "cb7f569262acaf5d0d6c001146855eb595ffdd20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/f300f03f809eaf8bf64785edcc869c6412dfb9ca",
-                "reference": "f300f03f809eaf8bf64785edcc869c6412dfb9ca",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/cb7f569262acaf5d0d6c001146855eb595ffdd20",
+                "reference": "cb7f569262acaf5d0d6c001146855eb595ffdd20",
                 "shasum": ""
             },
             "replace": {
@@ -2145,7 +2142,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2015-06-27 13:21:55"
+            "time": "2015-07-07 04:43:37"
         },
         {
             "name": "vlucas/phpdotenv",

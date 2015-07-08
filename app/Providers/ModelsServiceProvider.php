@@ -31,10 +31,14 @@ class ModelsServiceProvider extends ServiceProvider
             $loader->alias('User', 'App\Http\Models\User');
             $loader->alias('App\User','User');
             $loader->alias('Student', 'App\Http\Models\Student');             
+            $loader->alias('Teacher', 'App\Http\Models\Teacher');             
             $loader->alias('OrganismSetup', 'App\Http\Models\OrganismSetup');
             $loader->alias('Organism', 'App\Http\Models\Organism'); 
             $loader->alias('Database', 'App\Http\Models\Database');                           
-            $loader->alias('ConnectionCFG', 'App\Http\Models\ConnectionCFG');                           
+            $loader->alias('DatabaseConnection', 'App\Http\Models\DatabaseConnection');                           
+            $loader->alias('Capsule', 'Illuminate\Database\Capsule\Manager');                           
+            $loader->alias('Container', 'Illuminate\Container\Container');                           
+            $loader->alias('Dispatcher', 'Illuminate\Events\Dispatcher');                           
 
         });
     }

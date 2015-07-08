@@ -36,7 +36,7 @@ class Database extends Model
 	
 	public function connect($options = null)
 	{
-		$connection = new ConnectionCFG(['database' => $this->name,]);
+		$connection = new DatabaseConnection(['database' => $this->name,]);
 
 		return $connection;
 	}
@@ -46,22 +46,13 @@ class Database extends Model
 		return $this->connect($options);
 	}
 
-	/**
-	 * Get the on the fly connection.
-	 *
-	 * @return \Illuminate\Database\Connection
-	 */
+
 	public function connection()
 	{
 		return $this->connect();
 	}
 
-	/**
-	 * Get a table from the on the fly connection.
-	 *
-	 * @var    string $table
-	 * @return \Illuminate\Database\Query\Builder
-	 */
+
 	public function table($table = null)
 	{
 		return $this->connection()->getTable($table);

@@ -13,9 +13,14 @@ class TwitterBootstrapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-                    vendor_path('twitter/bootstrap/') => public_path('vendor/twitter-bootstrap'),
-        ], 'public');
+        // $this->publishes([
+        //             vendor_path('twitter/bootstrap/') => public_path('vendor/twitter-bootstrap'),
+        // ], 'public');
+       
+        // $this->publishes([
+        //                 vendor_path('caouecs/laravel4-lang/') => resources_path('lang/'),
+        //     ], 'public');
+
     }
 
     /**
