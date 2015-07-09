@@ -56,3 +56,14 @@ function databases()
 
     return $list;
 }
+
+function getControllerAndActionName()
+{
+    $action = app('request')->route()->getAction();
+
+    $controller = class_basename($action['controller']);
+
+    list($controller, $action) = explode('@', $controller);
+
+    return ['action' => $action, 'controller' => $controller];
+}

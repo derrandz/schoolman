@@ -1,5 +1,5 @@
  <p>Current Database <strong style="color:green;"><?php echo current_database() ?></strong></p> 
-{!! Form::open(['route' => 'switch.database',
+<!-- {!! Form::open(['route' => 'switch.database',
                'method' => 'GET']) 
 !!}
 
@@ -23,4 +23,4 @@
    {!! Form::select("database_name", $db_array, null, ["class" => "form-control"]) !!}
    {!! Form::submit('Change Database') !!}  
  </div>
-{!! Form::close() !!}
+{!! Form::close() !!} -->

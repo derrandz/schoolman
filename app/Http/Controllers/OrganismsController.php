@@ -13,6 +13,7 @@ use Teacher;
 
 class OrganismsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -49,10 +50,12 @@ class OrganismsController extends Controller
         if ( !(OrganismSetup::create(['name' => $name, 'code' => $code, 'connect' => true])) )
         {
             Session::flash('failure', 'This is a message!'); 
+            Session::flash('flash_type', 'alert-danger'); 
             return view('organisms.index', ['orgs' => $orgs]);
         }
 
-        Session::flash('success', 'This is a message!'); 
+        Session::flash('flash_message', 'This is a message!'); 
+        Session::flash('flash_type', 'alert-success'); 
         return view('organisms.index', ['orgs' => $orgs]);
     }
 
@@ -64,10 +67,6 @@ class OrganismsController extends Controller
      */
     public function show($id)
     {
-        $database_name = Organism::find($id)->database->name;
-
-        $this->set_database($database_name);
-
         $users = User::all();
         $teachers = Teacher::all();
         return view('organisms.show', ['users' => $users, 'teachers' => $teachers]);

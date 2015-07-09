@@ -17,6 +17,11 @@ abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
 
+    public function __construct()
+    {
+        $this->middleware('set_proper_database');
+    }
+
     public function is_logged()
     {
     	if( !(Auth::check()) )
