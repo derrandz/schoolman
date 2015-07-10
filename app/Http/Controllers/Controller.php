@@ -17,11 +17,6 @@ abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
 
-    public function __construct()
-    {
-        $this->middleware('set_proper_database');
-    }
-
     public function is_logged()
     {
     	if( !(Auth::check()) )
@@ -30,10 +25,5 @@ abstract class Controller extends BaseController
     		Session::flash('flash_type', 'alert-warning');
     		return Redirect::to('auth/login');
     	}
-    }
-
-    public function set_database($database_name)
-    {
-        $database_connection = new DatabaseConnection(['database' => $database_name]);
     }
 }

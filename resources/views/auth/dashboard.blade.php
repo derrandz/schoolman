@@ -38,16 +38,11 @@
                 </tr>
               </thead>
               <tbody>
-              @foreach(current_user()->files as $file)
-                @foreach($file->students as $student)
                 <tr>
-                  <td><?= $file->id?></td>
-                  <td><?= $student->name?></td>
-                  <td><?= $student->age?></td>
-                  <td><?= $student->grade?></td>
+                  <td>Name</td>
+                  <td>Name</td>
+                  <td>Name</td>
                 </tr>
-                @endforeach
-              @endforeach
               </tbody>
             </table>
           </div>

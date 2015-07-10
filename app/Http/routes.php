@@ -39,6 +39,29 @@ Route::get('/switch_db/{database_name}', [ 'as' => 'switch.database', 'uses' => 
 Route::resource('files', 'FilesController');
 Route::resource('organisms', 'OrganismsController');
 
+Route::get('roles_and_permissions/create_permission',[
+								'as' => 'roles_and_permissions.permission.create', 
+								'uses' => 'RolesAndPermissionsController@create_permission'
+													]);
+
+Route::post('roles_and_permissions/permission_store',[
+								'as' => 'roles_and_permissions.permission.store', 
+								'uses' => 'RolesAndPermissionsController@store_permission'
+													]);
+
+Route::get('roles_and_permissions/create_role',[
+								'as' => 'roles_and_permissions.role.create', 
+								'uses' => 'RolesAndPermissionsController@create_role'
+													]);
+
+Route::post('roles_and_permissions/role_store',[
+								'as' => 'roles_and_permissions.role.store', 
+								'uses' => 'RolesAndPermissionsController@store_role'
+													]);
+
+Route::resource('roles_and_permissions', 'RolesAndPermissionsController');
+
+
 // // Authentication routes...
 Route::get('auth/login', ['as' => 'auth.login',
 						  'uses' => 'Auth\AuthController@getLogin']

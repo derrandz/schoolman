@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\Internals;
 
 use Illuminate\Database\Eloquent\Model;
 use Artisan;
@@ -13,6 +13,11 @@ class Organism extends Model
     public function database()
     {
     	return $this->hasOne('Database');
+    }
+
+    public function staff()
+    {
+        return $this->hasMany('User');
     }
 
     public function create_database($attributes = array())

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\Tenants;
 
 use Illuminate\Database\Eloquent\Model;
 use Excel;
@@ -11,13 +11,7 @@ class File extends Model
     protected $table = 'files';
 
 
-    protected $fillable = ['name', 'extension', 'size', 'path', 'description', 'user_id'];
-
-
-    public function user()
-    {
-        return $this->belongsTo('User');
-    }
+    protected $fillable = ['name', 'extension', 'size', 'path', 'description'];
 
     public function students()
     {

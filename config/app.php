@@ -155,6 +155,7 @@ return [
         'Collective\Html\HtmlServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
+        'Zizaco\Entrust\EntrustServiceProvider'
 
     ],
 
@@ -209,6 +210,7 @@ return [
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
         'Helper' => 'App\Helpers\helpers',
         'Debugbar' => 'Barryvdh\Debugbar\Facade',
+        'Entrust' => 'Zizaco\Entrust\EntrustFacade'
     ],
 
 ];

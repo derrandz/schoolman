@@ -4,11 +4,13 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Request;
+use Auth;
+use View;
 use Session;
 
-class Authenticate
+class RedirectIfNotAuthenticated
 {
+
     /**
      * The Guard implementation.
      *
@@ -36,17 +38,22 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                Session::flash('flash_message', 'You have to be logged in first.');
-                Session::flash('flash_type', 'alert-warning');
-                return redirect()->guest('auth/login');
+        if( $this->auth->check() )
+        {
+            if( Auth::user()->is_admin() )
+            {
+                return \Redirect::route('organisms.index');
+            }
+            else
+            {
+                return View::make('welcome');
             }
         }
-
-        return $next($request);
+        else
+        {
+            Session::flash('flash_message', 'You have to be logged in first.');
+            Session::flash('flash_type', 'alert-warning');
+            return \Redirect::route('auth.login');
+        }
     }
 }

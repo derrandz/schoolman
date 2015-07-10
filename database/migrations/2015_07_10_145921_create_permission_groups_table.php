@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreatePermissionGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,10 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function(Blueprint $table) {
+        Schema::create('permission_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('extension');
-            $table->decimal('size');
-            $table->string('path');
-            $table->string('description');
-            $table->timestamps('uploaded_at');
+            $table->timestamps();
         });
     }
 
@@ -31,7 +27,7 @@ class CreateFilesTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('files');
+        Schema::drop('permission_groups');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

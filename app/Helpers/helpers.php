@@ -67,3 +67,35 @@ function getControllerAndActionName()
 
     return ['action' => $action, 'controller' => $controller];
 }
+
+function flash($type, $content)
+{
+    $type_html_class = '';
+
+        Session::flash('flash_message', $content);
+
+        switch($type)
+        {
+            case "success" : $type_html_class = 'alert-success';
+            break;
+            
+            case "notice" : $type_html_class = 'alert-info';
+            break;
+
+            case "danger" : $type_html_class = 'alert-danger';
+            break;
+
+            case "warning" : $type_html_class = 'alert-warning';
+            break;
+
+            case "primary" : $type_html_class = 'alert-primary';
+            break;
+
+            default:
+                $type_html_class = "text-info";
+                break;
+        }
+
+        Session::flash("flash_type", $type_html_class);
+
+}

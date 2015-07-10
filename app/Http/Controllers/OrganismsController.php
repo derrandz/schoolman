@@ -10,10 +10,17 @@ use App\Http\Controllers\Controller;
 use Organism;
 use User;
 use Teacher;
+use Sessions;
 
 class OrganismsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware('set_proper_database');
+    }
+    
     /**
      * Display a listing of the resource.
      *

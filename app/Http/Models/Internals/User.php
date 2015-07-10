@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\Internals;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Role;
 
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
+    use EntrustUserTrait; // add this trait to your user model
 
     /**
      * The database table used by the model.
@@ -34,9 +37,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function files()
+
+    public function school()
     {
-        return $this->hasMany('File');
+        return $this->belongsTo('Organism');
     }
 
     public function create_file($name, $extension, $size, $path, $description)
@@ -57,6 +61,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return false;
         }
         return $id;
+    }
+
+    public function is_admin()
+    {
+        return $this->hasRole(['admin']);
     }
 
 }
