@@ -20,11 +20,6 @@ class CreateStudentsTable extends Migration
             $table->string('age');
             $table->string('grade');
             $table->timestamps('created_at');
-
-            $table->foreign('file_id')
-                  ->references('id')
-                  ->on('files')
-                  ->onDelete('cascade');
       });
     }
 

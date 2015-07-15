@@ -30,8 +30,16 @@ class ModelsServiceProvider extends ServiceProvider
             $loader->alias('File', 'App\Http\Models\Tenants\File');
             $loader->alias('User', 'App\Http\Models\Internals\User');
             $loader->alias('App\User','User'); //redirection to the right alias
+
+            //Tenants
             $loader->alias('Student', 'App\Http\Models\Tenants\Student');             
             $loader->alias('Teacher', 'App\Http\Models\Tenants\Teacher');             
+            $loader->alias('Class','App\Http\Models\Tenants\Class');
+            $loader->alias('Exam','App\Http\Models\Tenants\Exam');
+            $loader->alias('Course','App\Http\Models\Tenants\Course');
+            $loader->alias('Result','App\Http\Models\Tenants\Result');
+
+            //Internals
             $loader->alias('OrganismSetup', 'App\Http\Models\OrganismSetup');
             $loader->alias('Organism', 'App\Http\Models\Internals\Organism'); 
             $loader->alias('Database', 'App\Http\Models\Internals\Database');                           
@@ -39,10 +47,12 @@ class ModelsServiceProvider extends ServiceProvider
             $loader->alias('Capsule', 'Illuminate\Database\Capsule\Manager');                           
             $loader->alias('Container', 'Illuminate\Container\Container');                           
             $loader->alias('Dispatcher', 'Illuminate\Events\Dispatcher');  
-            $loader->alias('Permission','App\Http\Models\Internals\Permission');                         
-            $loader->alias('PermissionGroup','App\Http\Models\Internals\PermissionGroup');                         
+            $loader->alias('Permission','App\Http\Models\Internals\Permission');                                   
             $loader->alias('Role','App\Http\Models\Internals\Role');                         
-            $loader->alias('App\Http\Models\Role','Role');                         
+            $loader->alias('App\Http\Models\Role','Role');       
+
+            //Others                  
+            $loader->alias('SesssionsHelper','App\Helpers\SesssionsHelper');
 
         });
     }

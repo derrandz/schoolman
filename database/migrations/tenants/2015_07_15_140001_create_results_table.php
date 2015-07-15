@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermissionGroupsTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,16 @@ class CreatePermissionGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permission_groups', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->float('score');
+            $table->integer('exam_id')->unsigned();
+            $table->string('Rating', 3);
             $table->timestamps();
+
+            $table->foreign('exam_id')
+                  ->references('id')
+                  ->on('exams');
         });
     }
 
@@ -27,7 +33,7 @@ class CreatePermissionGroupsTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::drop('permission_groups');
+        Schema::drop('results');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -15,12 +15,12 @@ function resources_path($path)
 
 function is_logged()
 {
-	return Auth::check();
+	return SessionsHelper::isLogged();
 }
 
 function current_user()
 {
-    return ( Auth::check()) ? Auth::user() : null;
+    return SessionsHelper::getAuthUser();
 }
 
 function current_database()

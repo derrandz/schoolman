@@ -15,4 +15,14 @@ class Student extends Model
     {
         return $this->belongsTo('File');
     }
+
+    public function classes()
+    {
+    	return $this->hasMany('Class');
+    }
+
+    public function teachers()
+    {
+    	return $this->hasManyThrough('Teacher', 'Class');
+    }
 }
