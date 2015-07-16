@@ -12,13 +12,19 @@ use User;
 use Teacher;
 use Sessions;
 
+use OrganismsRepoInterface;
+
 class OrganismsController extends Controller
 {
 
-    public function __construct()
+    protected $organisms;
+
+    public function __construct(OrganismsRepoInterface $org)
     {
         $this->middleware('admin');
         $this->middleware('set_proper_database');
+
+        $this->organisms = $org;
     }
     
     /**
@@ -28,7 +34,7 @@ class OrganismsController extends Controller
      */
     public function index()
     {
-        $orgs = Organism::all();
+        $orgs = $this->organisms->all();
         return view('organisms.index', ['orgs' => $orgs]);
     }
 
@@ -49,7 +55,7 @@ class OrganismsController extends Controller
      */
     public function store(Request $request)
     {
-        $orgs = Organism::all();
+        $org = $this->organisms->all();
 
         $name = $request->input('name');
         $code = $request->input('code');

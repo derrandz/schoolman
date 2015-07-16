@@ -19,6 +19,7 @@
            @else
             <li><a href="/auth/logout">Logout</a></li>
            @endif
+           <li><a href="#"><strong style="color:green;"><?= current_user() ?></strong></a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

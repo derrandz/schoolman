@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Helpers\Classes;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Session;
 
 class SessionsHelper extends Model
 {

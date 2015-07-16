@@ -20,7 +20,14 @@ function is_logged()
 
 function current_user()
 {
-    return SessionsHelper::getAuthUser();
+    $current_user = SessionsHelper::getAuthUser();
+
+    if( $current_user == 'empty')
+    {
+        return 'Not logged in.';
+    }
+
+    return $current_user->name;
 }
 
 function current_database()

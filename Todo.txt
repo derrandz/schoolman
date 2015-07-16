@@ -1,0 +1,9 @@
+Create the models
+Create the schemas for each model
+Create the loginlogout listeners
+create the sessionhelper class
+create the controllers 
+populate database for roles
+create middlewares for roles and permissions
+set manual crud per permission and set the scenarios
+proceed to files formats.
