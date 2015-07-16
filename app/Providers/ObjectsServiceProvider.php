@@ -37,7 +37,7 @@ class ObjectsServiceProvider extends ServiceProvider
 
             //Internals
             $loader->alias('User', 'App\Models\Internals\Objects\User');
-            $loader->alias('Organism', 'App\Models\Internals\Objects\Organism'); 
+            $loader->alias('School', 'App\Models\Internals\Objects\School'); 
             $loader->alias('Database', 'App\Models\Internals\Objects\Database'); 
             $loader->alias('Permission','App\Models\Internals\Objects\Psudoermission');                                   
             $loader->alias('Role','App\Models\Internals\Objects\Role');      

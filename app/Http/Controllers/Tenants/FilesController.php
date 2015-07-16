@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tenants;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use Auth;
 use File;
 Use User;
@@ -17,8 +18,7 @@ use View;
 
 class FilesController extends Controller
 {
-
-        public function __construct()
+    public function __construct()
         {
             $this->beforeFilter('@is_logged');
         }

@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function school()
     {
-        return $this->belongsTo('Organism');
+        return $this->belongsTo('School');
     }
 
     public function create_file($name, $extension, $size, $path, $description)

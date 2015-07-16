@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Artisan;
 use Config;
 
-class Organism extends Model
+class School extends Model
 {
     protected $fillable = ['name', 'code'];
 

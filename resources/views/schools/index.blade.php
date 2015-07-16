@@ -3,7 +3,7 @@
 @extends('layouts.main')
 
     @section('content')
-    <a href="/organisms/create"><button><i class="glyphicon glyphicon-plus"></i>New Organisation</button></a>
+    <a href="/schools/create"><button><i class="glyphicon glyphicon-plus"></i>New Organisation</button></a>
         <div class="container">
             <div class="content">
                 <div class="title">Records Show Page</div>
@@ -19,13 +19,23 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($orgs as $org)
+                        @foreach($schools as $school)
                         <tr>
-                          <td>{!! Html::linkRoute('organisms.show', $org->id, array('id' => $org->id ) ) !!}</td>
-                          <td><?= $org->name?></td>
-                          <td><?= $org->code?></td>
+                          <td>{!! Html::linkRoute('schools.show', $school->id, array('id' => $school->id ) ) !!}</td>
+                          <td><?= $school->name?></td>
+                          <td><?= $school->code?></td>
                           <td>
-                  <a href="#"><button><i class="glyphicon glyphicon-plus"></i>Delete</button></a>
+                             {!! Form::open(['route'=> 'schools.destroy',
+                                      array('id' => $school->id),
+                                      'method' => 'DELETE',
+                                ]) !!}
+                            {!! csrf_field() !!}
+
+                          <a href="#"><button><i class="glyphicon glyphicon-plus"></i>Delete</button></a>
+                            {!! Form::close() !!}
+
+                          </td>
+                          <td>
                   <a href="#"><button><i class="glyphicon glyphicon-plus"></i>Edit</button></a>
                           </td>
                         </tr>

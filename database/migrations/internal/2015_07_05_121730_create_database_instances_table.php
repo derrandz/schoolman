@@ -14,14 +14,14 @@ class CreateDatabaseInstancesTable extends Migration
     {
         Schema::create('database_instances', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('organism_id')->unsigned();
+            $table->integer('school_id')->unsigned();
             $table->string('name', 255);
             $table->timestamps();
 
 
-            $table->foreign('organism_id')
+            $table->foreign('school_id')
                   ->references('id')
-                  ->on('organisms')
+                  ->on('schools')
                   ->onDelete('cascade');
         });
     }

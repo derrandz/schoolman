@@ -30,7 +30,7 @@ class HelperClassesSP extends ServiceProvider
             $loader->alias('Container', 'Illuminate\Container\Container');                           
             $loader->alias('Dispatcher', 'Illuminate\Events\Dispatcher');                         
             $loader->alias('SessionsHelper','App\Helpers\Classes\SessionsHelper');
-            $loader->alias('OrganismSetup','App\Helpers\Classes\OrganismSetup');
+            $loader->alias('SchoolsFactory','App\Helpers\Classes\SchoolsFactory');
             $loader->alias('DatabaseConnection','App\Helpers\Classes\DatabaseConnection');
         });
     }

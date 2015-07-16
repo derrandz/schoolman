@@ -12,6 +12,7 @@ class AuthController extends Controller
 {
 
     protected $redirectPath = '/dashboard';
+    protected $redirectAfterLogout = '/auth/login';
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -24,17 +25,6 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers;
-
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-        // $this->middleware('guest', ['except' => 'getLogout']);
-    }
 
     /**
      * Get a validator for an incoming registration request.

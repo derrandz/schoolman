@@ -22,7 +22,7 @@ function current_user()
 {
     $current_user = SessionsHelper::getAuthUser();
 
-    if( $current_user == 'empty')
+    if( $current_user == 'empty' || is_null($current_user))
     {
         return 'Not logged in.';
     }

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Auth;
 use View;
 use Session;
+use Lang;
 
 class RedirectIfNotAuthenticated
 {
@@ -38,22 +39,17 @@ class RedirectIfNotAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        if( $this->auth->check() )
-        {
-            if( Auth::user()->is_admin() )
-            {
-                return \Redirect::route('organisms.index');
-            }
-            else
-            {
-                return View::make('welcome');
-            }
-        }
-        else
+        if( !$this->auth->check() )
         {
             Session::flash('flash_message', 'You have to be logged in first.');
             Session::flash('flash_type', 'alert-warning');
+
+            flash('warning', Lang::has('auth.access-denied')
+                ? Lang::get('auth.access-denied') : 'Set message');
             return \Redirect::route('auth.login');
         }
+
+        return $next($request);
+        
     }
 }

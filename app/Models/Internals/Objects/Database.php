@@ -5,21 +5,22 @@ namespace App\Models\Internals\Objects;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use DB;
+use DatabaseConnection;
 
 class Database extends Model
 {
 
 	protected $table = 'database_instances';
 
-	protected $fillable = ['name', 'organism_id'];
+	protected $fillable = ['name', 'school_id'];
 
 	/**
 	* Eloquent Relationshis.
 	*
 	*/
-    public function organism()
+    public function school()
     {
-    	return $this->belongsTo('Organism');
+    	return $this->belongsTo('School');
     }
 
 	/**

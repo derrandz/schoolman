@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Helprs\Classes;
+namespace App\Helpers\Classes;
 
 use Illuminate\Database\Eloquent\Model;
 use Artisan;
 
-class OrganismSetup
+use School;
+
+class SchoolsFactory
 {
-	protected $org;
+	protected $school;
     protected $name;
     protected $code;
     protected $connect;
@@ -34,7 +36,7 @@ class OrganismSetup
 
     public function setup()
     {
-    	$this->create_organism();
+    	$this->create_school();
 
         if(!($this->connect))
         {
@@ -47,17 +49,17 @@ class OrganismSetup
             $this->run_migrations();
         }
 
-    	return $this->org;
+    	return $this->school;
     }
 
     public function reset_default_db_config()
     {
-        $this->org->set_default_db_config();
+        $this->school->set_default_db_config();
     }
 
-    public function create_organism()
+    public function create_school()
     {
-    	$this->org = Organism::create([
+    	$this->school = School::create([
     		'name' => $this->name,
     		'code' => $this->code,
     		]);
@@ -66,27 +68,25 @@ class OrganismSetup
     public function create_db()
     {
         $db_name = 'database_of_'.(str_replace(" ","_",$this->name));
-        $this->org->create_database(array('name' => $db_name,));
+        $this->school->create_database(array('name' => $db_name,));
     }
 
     public function configure_database()
     {
-        return $this->org->configure_database();
+        return $this->school->configure_database();
     }
 
 	public function create_db_and_connect()
 	{
 		$this->create_db();
-		$this->org->connect_to_database();
+		$this->school->connect_to_database();
 	}
 
 
 	public function run_migrations()
 	{
-        return $this->org->run_migrations();
+        return $this->school->run_migrations();
     }
-
-
 
 }
 

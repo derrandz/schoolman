@@ -8,6 +8,7 @@ use DB;
 use Dispatcher;
 use Container;
 use Capsule;
+use Database;
 
 class DatabaseConnection extends Model
 {
@@ -65,6 +66,8 @@ class DatabaseConnection extends Model
 			$default[$item] = isset($options[$item]) ? $options[$item] : $default[$item];
 		}
 
+		Config::set("database.connections.$database", $default);
+		
 		$capsule = new Capsule;
 		$capsule->addConnection($default);
 		$capsule->setEventDispatcher(new Dispatcher(new Container));

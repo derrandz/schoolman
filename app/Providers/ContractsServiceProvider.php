@@ -26,9 +26,9 @@ class ContractsServiceProvider extends ServiceProvider
         $this->app->booting(function()
         {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('OrganismsInterface', 'App\Models\Internals\Contracts\OrganismsInterface');
-            $loader->alias('OrganismsRepository', 'App\Models\Internals\Repositories\OrganismsRepository');
-            $loader->alias('OrganismsRepoInterface', 'OrganismsRepository');
+            $loader->alias('SchoolsInterface', 'App\Models\Internals\Contracts\SchoolsInterface');
+            $loader->alias('SchoolsRepository', 'App\Models\Internals\Repositories\SchoolsRepository');
+            $loader->alias('SchoolsRepoInterface', 'SchoolsRepository');
 
         });
     }

@@ -21,8 +21,7 @@ class SetProperDatabase
         $controller_name = $controllerAndActionName['controller'];
         $action_name = $controllerAndActionName['action'];
 
-        dd($request);
-        if($controller_name === 'OrganismsController')
+        if($controller_name === 'SchoolsController')
         {
             if($action_name == 'show')
             {

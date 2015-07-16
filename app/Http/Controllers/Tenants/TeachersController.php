@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tenants;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UsersController extends Controller
+class TeachersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,9 +32,10 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  Request  $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
     }
@@ -64,10 +65,11 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  Request  $request
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         //
     }

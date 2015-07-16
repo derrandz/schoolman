@@ -7,7 +7,7 @@
                 <div class="title">New Organisation</div>
             </div>
             <div class="content">
-              {!! Form::open(['route'=> 'organisms.store',
+              {!! Form::open(['route'=> 'schools.store',
                                       'method' => 'POST'
                                 ]) !!}
                     {!! csrf_field() !!}
