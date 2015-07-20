@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers\Traits;
 use View;
+use Input;
+use Lang;
+use Redirect;
 
+/*
+|
+|
+|$this refers to the implementing motor.
+|
+|
+*/
 trait CRUDtrait
 {
 
@@ -19,44 +29,73 @@ trait CRUDtrait
 	}
 
 
-	public function store()
+	public function show($id)
 	{
-		$data = array();
-		$attributes = $this->model->attributes;
-
-		foreach($attributes as $attr)
+		if( ! ( $instance = $this->model->find($id) ))
 		{
-			$data[] = Input::get( toString($attr) );
+			flash('warning', "There is no such record in our database!");
+			return RedirectToRoute('dashboard.schools.index', [ 'all' => $this->model->all() ]);
 		}
 
-		if( !($this->model->create($data)) )
+		return view($this->view.'.show', ['instance' => $instance]);
+	}
+
+	public function store()
+	{
+		$attributes = $this->model->attributes;
+		$data       = getInput($attributes);
+
+		if( !( $this->model->create($data) ) )
 		{
-			flash('danger', (Lang::has('create-failure') ? Lang::get('create-failure') : 'Set message'));
+			flash('danger', (Lang::has('crud.create-failure') ? Lang::get('crud.create-failure') : 'Set message'));
 			return view($this->view.'.create');
 		}
 
-		flash('success', (Lang::has('create-success') ? Lang::get('create-success') : 'Set message'));
-		return view($this->view.'.create');
+		flash('success', (Lang::has('crud.create-success') ? Lang::get('crud.create-success') : 'Set message'));
+		return RedirectToRoute('dashboard.schools.create', ['all' => $this->model->all()]);
 
 	}
 
 
-	public function edit()
+	public function edit($id)
 	{
-
+		return view($this->view.'.edit', ['instance' => $this->model->find($id)]);
 	}
 
 
-	public function update()
+	public function update($id)
 	{
+		$attributes = $this->model->attributes;
+		$data = getInput($attributes);
 
+		if( !($this->model->update($id, $data)) )
+		{
+			flash('danger', (Lang::has('crud.update-failure') ? Lang::get('crud.update-failure') : 'Set message'));
+			return $this->index();
+		}
+
+		flash('success', (Lang::has('crud.update-success') ? Lang::get('crud.update-success') : 'Set message'));
+
+		return RedirectToRoute('dashboard.schools.index',['all' => $this->model->all()]);
 	}
 
-
-	public function delete()
+	public function delete($id)
 	{
-
+		return view($this->view.'.delete', ['instance' => $this->model->find($id)]);
 	}
 
+	public function destroy($id)
+	{
+		$instance  = $this->model->find($id);
+		
+		if( !( $instance->destroy($id) ) )
+		{
+			flash('danger', (Lang::has('crud.destroy-failure') ? Lang::get('crud.destroy-failure') : 'Set message'));
+			return $this->index();
+		}
+
+		flash('success', (Lang::has('crud.destroy-success') ? Lang::get('crud.destroy-success') : 'Set message'));
+		return RedirectToRoute('dashboard.schools.index', ['all' => $this->model->all()]);
+	}
 
 }

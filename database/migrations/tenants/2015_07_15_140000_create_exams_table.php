@@ -18,7 +18,7 @@ class CreateExamsTable extends Migration
             $table->string('duration');
             $table->date('date');
             $table->string('description');
-            $table->integer('course_id');
+            $table->integer('course_id')->unsigned();
 
             $table->timestamps();
         

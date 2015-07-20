@@ -78,4 +78,12 @@ class School extends Model
         return $this->table('students');
     }
 
+
+    public function update_database($name)
+    {
+        $database = $this->database;
+
+        $database->name = $name;
+        return $database->save();
+    }
 }

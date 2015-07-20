@@ -1,8 +1,8 @@
 
           <ul class="nav nav-sidebar">
             <li class="active"><a href="/dashboard/index">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="/dashboard/schools">Schools</a></li>
-            <li><a href="/dashboard/users">Users</a></li>
+            <li><a href="/dashboard/schools">Classes</a></li>
+            <li><a href="/dashboard/users">Teachers</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li></li>

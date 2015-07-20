@@ -17,7 +17,7 @@ class SchoolsFactory
 
     public static function create($params)
     {
-    	$instance = new static($params['name'], $params['code'], $params['connect']);
+    	$instance = new static($params['name'], $params['code']);
     	
         $instance->setup();
 
@@ -25,29 +25,19 @@ class SchoolsFactory
     }
 
 
-    public function __construct($name, $code, $connect)
+    public function __construct($name, $code)
     {
     	
         $this->name    = $name;
         $this->code    = $code;
-        $this->connect = $connect;
 
     }
 
     public function setup()
     {
     	$this->create_school();
-
-        if(!($this->connect))
-        {
-            $this->create_db();
-            $this->reset_default_db_config();
-        }
-        else
-        {
-            $this->create_db_and_connect();
-            $this->run_migrations();
-        }
+        $this->create_db_and_connect();
+        $this->run_migrations();
 
     	return $this->school;
     }

@@ -52,18 +52,96 @@ class DashboardController extends Controller
     	return view('dashboard.index', ['schools' => $schools, 'schools' => $schools]);
     }
 
+    /*
+    |
+    | Schools
+    |
+    */
+
     public function getSchoolsIndex()
     {
         return $this->motors['schools']->index();
     }
 
-    public function getUsersIndex()
+    public function getSchoolsShow($id)
     {
-    	return $this->motors['users']->index();
+    	return $this->motors['schools']->show($id);
     }
 
-    public function getDatabasesIndex()
+    public function getSchoolsCreate()
     {
-    	// return $this->motors['databases']->index();
+    	return $this->motors['schools']->create();
     }
+
+    public function postSchoolsStore()
+    {
+    	return $this->motors['schools']->store();
+    }
+
+    public function getSchoolsEdit($id)
+    {
+    	return $this->motors['schools']->edit($id);
+    }
+
+    public function putSchoolsUpdate($id)
+    {
+    	return $this->motors['schools']->update($id);
+    }
+    
+    public function getSchoolsDelete($id)
+    {
+    	return $this->motors['schools']->delete($id);
+    }
+
+    public function deleteSchoolsDestroy($id)
+    {
+    	return $this->motors['schools']->destroy($id);
+    }
+
+    /*
+    |
+    | Users
+    |
+    */
+
+	public function getUsersIndex()
+    {
+        return $this->motors['users']->index();
+    }
+
+    public function getUsersShow($id)
+    {
+    	return $this->motors['users']->show($id);
+    }
+
+    public function getUsersCreate()
+    {
+    	return $this->motors['users']->create();
+    }
+
+    public function postUsersStore()
+    {
+    	return $this->motors['users']->store();
+    }
+
+    public function getUsersEdit($id)
+    {
+    	return $this->motors['users']->edit($id);
+    }
+
+    public function putUsersUpdate($id)
+    {
+    	return $this->motors['users']->update($id);
+    }
+    
+    public function getUsersDelete($id)
+    {
+    	return $this->motors['users']->delete($id);
+    }
+
+    public function deleteUsersDestroy($id)
+    {
+    	return $this->motors['users']->destroy($id);
+    }
+
 }

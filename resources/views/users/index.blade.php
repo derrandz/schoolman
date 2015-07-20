@@ -4,6 +4,7 @@
 
     @section('content')
     <h1>Dashboard</h1>
+      <td>{!! Html::linkRoute('dashboard.users.create', "New User") !!}</td>
         <div class="container">
             <div class="content">
                 <div class="title">Dashboard</div>
@@ -21,12 +22,12 @@
                       <tbody>
                         @foreach($all as $user)
                         <tr>
-                          <td>{!! Html::linkRoute('users.show', $user->id, array('id' => $user->id ) ) !!}</td>
+                          <td>{!! Html::linkRoute('dashboard.users.show', $user->id, array('id' => $user->id ) ) !!}</td>
                           <td><?= $user->name ?></td>
                           <td>
-                            <!--  {!! Form::open( array(
-                                                    'route' => array('users.destroy', $user->id)
-                                                    , 'method' => 'DELETE')) !!} -->
+                             {!! Form::open( array(
+                                                    'route' => array('dashboard.users.destroy', $user->id)
+                                                    , 'method' => 'DELETE')) !!}
                             {!! csrf_field() !!}
 
                           <a href="#"><button><i class="glyphicon glyphicon-plus"></i>Delete</button></a>

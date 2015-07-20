@@ -8,6 +8,9 @@ use School;
 
 class SchoolsRepository implements CRUDInterface
 {
+    public $attributes = ['name', 'code'];
+
+
     public function all()
     {
     	return School::all();
@@ -26,8 +29,11 @@ class SchoolsRepository implements CRUDInterface
     public function update($id, $params)
     {
         $school = School::find($id);
+
         $school->name = $params['name'];
         $school->code = $params['code'];
+
+        $school->update_database($params['name']);
 
         return $school->save();
     }

@@ -113,8 +113,13 @@ function getInput($attributes)
 
     foreach($attributes as $attr)
     {
-        $input[] = Input::get( toString($attr) );
+        $input[(string)$attr] = Input::get( (string)$attr );
     }
 
     return $input;
+}
+
+function RedirectToRoute($route, $params = array())
+{
+    return Redirect::route($route)->with($params);
 }

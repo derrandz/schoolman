@@ -27,29 +27,151 @@ Route::get('/error', function () {
 |
 */
 
-Route::get('dashboard/index', ['as' => 'schools.index',
+Route::get('dashboard/index', ['as' => 'dashboard.index',
 									'uses' => 'Controllers\DashboardController@getIndex']);
 
-Route::get('schools',['as' => 'schools.index',
-						  'uses' => 'Controllers\DashboardController@getSchoolsIndex']);
+/*
+|
+|
+|
+|Schools Motor Routes
+|
+|
+|
+*/
 
-Route::get('schools/{id}',['as' => 'schools.show',
-						  'uses' => 'Controllers\DashboardController@getSchoolsShow($id)']);
+//Index
+Route::get('dashboard/schools',[
 
-Route::get('schools',['as' => 'schools.destroy',
-						  'uses' => 'Controllers\DashboardController@getSchoolsIndex']);
+									'as'   => 'dashboard.schools.index',
+									'uses' => 'Controllers\DashboardController@getSchoolsIndex'
+	
+												]);
+
+//Create
+Route::get('dashboard/schools/create',[
+
+									'as'   => 'dashboard.schools.create',
+									'uses' => 'Controllers\DashboardController@getSchoolsCreate'
+	
+												]);
+
+//Show
+Route::get('dashboard/schools/{id}',[
+
+									'as'   => 'dashboard.schools.show',
+									'uses' => 'Controllers\DashboardController@getSchoolsShow'
+	
+												]);
+
+//Store
+Route::post('dashboard/schools/store',[
+
+									'as'   => 'dashboard.schools.store',
+									'uses' => 'Controllers\DashboardController@postSchoolsStore'
+	
+												]);
+
+//edit
+Route::get('dashboard/schools/{id}/edit',[
+
+									'as'   => 'dashboard.schools.edit',
+									'uses' => 'Controllers\DashboardController@getSchoolsEdit'
+	
+												]);
+
+//update
+Route::put('dashboard/schools/{id}/update',[
+
+									'as'   => 'dashboard.schools.update',
+									'uses' => 'Controllers\DashboardController@putSchoolsUpdate'
+	
+												]);
+
+//Delete
+Route::get('dashboard/schools/{id}/delete',[
+
+									'as'   => 'dashboard.schools.delete',
+									'uses' => 'Controllers\DashboardController@getSchoolsDelete'
+	
+												]);
+
+//Destroy
+Route::delete('dashboard/schools/{id}/destroy',[
+
+									'as'   => 'dashboard.schools.destroy',
+									'uses' => 'Controllers\DashboardController@deleteSchoolsDestroy'
+	
+												]);
 
 
+/*
+|
+|Users Motor Routes
+|
+*/
 
-Route::get('users',['as' => 'users.index',
-						  'uses' => 'Controllers\DashboardController@getUsersIndex']);
+//Index
+Route::get('dashboard/users',[
+							
+							'as' 	=> 'dashboard.users.index',
+						  	'uses' 	=> 'Controllers\DashboardController@getUsersIndex'
+						  	
+						  	]);
 
-Route::get('users/{id}',['as' => 'users.show',
-						  'uses' => 'Controllers\DashboardController@getUsersShow($id)']);
+//Show
+Route::get('dashboard/users/{id}',[
 
-Route::get('users',['as' => 'users.destroy',
-						  'uses' => 'Controllers\DashboardController@getUsersIndex']);
+							'as'   => 'dashboard.users.show',
+							'uses' => 'Controllers\DashboardController@getUsersShow'
+								]);
 
+//Get
+Route::get('dashboard/users/create',[
+							
+							'as' 	=> 'dashboard.users.create',
+						  	'uses' 	=> 'Controllers\DashboardController@getUsersCreate
+						  	
+						  	']);
+
+//Post
+Route::post('dashboard/users/store',[
+							
+							'as' 	=> 'dashboard.users.store',
+						  	'uses' 	=> 'Controllers\DashboardController@postUsersStore
+						  	
+						  	']);
+
+//edit
+Route::get('dashboard/users/{id}/edit',[
+
+							'as'    => 'dashboard.users.edit',
+						  	'uses' 	=> 'Controllers\DashboardController@getUsersEdit'
+									]);
+
+//update
+Route::put('dashboard/users/{id}/update',[
+							
+							'as' 	=> 'dashboard.users.show',
+						  	'uses' 	=> 'Controllers\DashboardController@putUsersUpdate
+						  	
+						  	']);
+
+//Delete
+Route::get('dashboard/users/{id}/delete',[
+							
+							'as' 	=> 'dashboard.users.delete',
+						  	'uses' 	=> 'Controllers\DashboardController@getUsersDelete
+						  	
+						  	']);
+
+//Destroy
+Route::delete('dashboard/users/{id}/destroy',[
+							
+							'as' 	=> 'dashboard.users.destroy',
+						  	'uses' 	=> 'Controllers\DashboardController@deleteUsersDes
+						  	
+						  	troy']);
 
 /*
 |

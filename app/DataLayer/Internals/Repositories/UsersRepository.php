@@ -28,9 +28,10 @@ class UsersRepository implements CRUDInterface
 
     public function update($id, $params = array())
     {
-        $user = User::find($id);
-        $user->name = $params['name'];
-        $user->code = $params['code'];
+        $user           = User::find($id);
+        $user->name     = $params['name'];
+        $user->email    = $params['email'];
+        $user->password = bcrypt($params['password']);
 
         return $user->save();
     }
