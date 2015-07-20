@@ -17,6 +17,8 @@ abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
 
+    protected $motors = array();
+    
     public function is_logged()
     {
     	if( !(Auth::check()) )

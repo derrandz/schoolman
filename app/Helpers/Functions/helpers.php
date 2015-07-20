@@ -106,3 +106,15 @@ function flash($type, $content)
         Session::flash("flash_type", $type_html_class);
 
 }
+
+function getInput($attributes)
+{
+    $input = array();
+
+    foreach($attributes as $attr)
+    {
+        $input[] = Input::get( toString($attr) );
+    }
+
+    return $input;
+}

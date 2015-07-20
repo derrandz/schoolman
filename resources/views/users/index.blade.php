@@ -3,10 +3,10 @@
 @extends('layouts.main')
 
     @section('content')
-    <a href="/schools/create"><button><i class="glyphicon glyphicon-plus"></i>New Organisation</button></a>
+    <h1>Dashboard</h1>
         <div class="container">
             <div class="content">
-                <div class="title">Records Show Page</div>
+                <div class="title">Dashboard</div>
                 <div class="content">
                    <div class="table-responsive">
                     <table class="table table-striped">
@@ -19,15 +19,14 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($all as $school)
+                        @foreach($all as $user)
                         <tr>
-                          <td>{!! Html::linkRoute('schools.show', $school->id, array('id' => $school->id ) ) !!}</td>
-                          <td><?= $school->name ?></td>
-                          <td><?= $school->code ?></td>
+                          <td>{!! Html::linkRoute('users.show', $user->id, array('id' => $user->id ) ) !!}</td>
+                          <td><?= $user->name ?></td>
                           <td>
-                             {!! Form::open( array(
-                                                    'route' => array('schools.destroy', $school->id)
-                                                    , 'method' => 'DELETE')) !!}
+                            <!--  {!! Form::open( array(
+                                                    'route' => array('users.destroy', $user->id)
+                                                    , 'method' => 'DELETE')) !!} -->
                             {!! csrf_field() !!}
 
                           <a href="#"><button><i class="glyphicon glyphicon-plus"></i>Delete</button></a>

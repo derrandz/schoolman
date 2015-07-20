@@ -143,9 +143,9 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\ObjectsServiceProvider::class,
-        App\Providers\ContractsServiceProvider::class,
+        App\Providers\DataLayerServiceProvider::class,
         App\Providers\HelperClassesSP::class,
+        App\Providers\ControllersServiceProvider::class,
         // App\Providers\TwitterBootstrapServiceProvider::class, 
 
         /*

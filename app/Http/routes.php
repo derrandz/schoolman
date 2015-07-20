@@ -22,42 +22,33 @@ Route::get('/error', function () {
 /*
 |
 |
-| Controllers RESTful routes.
+| Controllers routes.
 |
 |
 */
-Route::resource('files', 'Tenants\FilesController');
-Route::resource('schools', 'Internals\SchoolsController');
+
+Route::get('dashboard/index', ['as' => 'schools.index',
+									'uses' => 'Controllers\DashboardController@getIndex']);
+
+Route::get('schools',['as' => 'schools.index',
+						  'uses' => 'Controllers\DashboardController@getSchoolsIndex']);
+
+Route::get('schools/{id}',['as' => 'schools.show',
+						  'uses' => 'Controllers\DashboardController@getSchoolsShow($id)']);
+
+Route::get('schools',['as' => 'schools.destroy',
+						  'uses' => 'Controllers\DashboardController@getSchoolsIndex']);
 
 
-/*
-|
-|
-| Roles and Permissions Routes
-|
-|
-*/
-Route::get('roles_and_permissions/create_permission',[
-								'as' => 'roles_and_permissions.permission.create', 
-								'uses' => 'Internals\RolesAndPermissionsController@create_permission'
-													]);
 
-Route::post('roles_and_permissions/permission_store',[
-								'as' => 'roles_and_permissions.permission.store', 
-								'uses' => 'Internals\RolesAndPermissionsController@store_permission'
-													]);
+Route::get('users',['as' => 'users.index',
+						  'uses' => 'Controllers\DashboardController@getUsersIndex']);
 
-Route::get('roles_and_permissions/create_role',[
-								'as' => 'roles_and_permissions.role.create', 
-								'uses' => 'Internals\RolesAndPermissionsController@create_role'
-													]);
+Route::get('users/{id}',['as' => 'users.show',
+						  'uses' => 'Controllers\DashboardController@getUsersShow($id)']);
 
-Route::post('roles_and_permissions/role_store',[
-								'as' => 'roles_and_permissions.role.store', 
-								'uses' => 'Internals\RolesAndPermissionsController@store_role'
-													]);
-
-Route::resource('roles_and_permissions', 'Internals\RolesAndPermissionsController');
+Route::get('users',['as' => 'users.destroy',
+						  'uses' => 'Controllers\DashboardController@getUsersIndex']);
 
 
 /*
@@ -68,19 +59,19 @@ Route::resource('roles_and_permissions', 'Internals\RolesAndPermissionsControlle
 |
 */
 Route::get('auth/login', ['as' => 'auth.login',
-						  'uses' => 'Auth\AuthController@getLogin']
+						  'uses' => 'Controllers\Auth\AuthController@getLogin']
 						  );
 
 Route::post('auth/login', ['as' => 'auth.login.post',
-						  'uses' => 'Auth\AuthController@postLogin']
+						  'uses' => 'Controllers\Auth\AuthController@postLogin']
 						  );
 
 Route::get('auth/logout', ['as' => 'auth.logout',
-						  'uses' => 'Auth\AuthController@getLogout']
+						  'uses' => 'Controllers\Auth\AuthController@getLogout']
 						  );
 
 Route::get('/dashboard', ['as' => 'auth.dashboard',
-							  'uses' => 'Auth\AuthController@getDashboard']
+							  'uses' => 'Controllers\Auth\AuthController@getDashboard']
 							  );
 
 
@@ -92,9 +83,9 @@ Route::get('/dashboard', ['as' => 'auth.dashboard',
 |
 */
 Route::get('auth/register', ['as' => 'auth.sing_up',
-						  'uses' => 'Auth\AuthController@getRegister']
+						  'uses' => 'Controllers\Auth\AuthController@getRegister']
 						  );
 
 Route::post('auth/register', ['as' => 'auth.sing_up',
-						  'uses' => 'Auth\AuthController@postRegister']
+						  'uses' => 'Controllers\Auth\AuthController@postRegister']
 						  );
