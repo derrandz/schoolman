@@ -51,6 +51,11 @@ trait CRUDtrait
 			return view($this->view.'.create');
 		}
 
+		if($this->view == "schools") //treating a special case, real bad practice, will be replaced soon enough.
+		{
+			set_database(['central_database']);
+		}
+
 		flash('success', (Lang::has('crud.create-success') ? Lang::get('crud.create-success') : 'Set message'));
 		return RedirectToRoute('dashboard.schools.create', ['all' => $this->model->all()]);
 

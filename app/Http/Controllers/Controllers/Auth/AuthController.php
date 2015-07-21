@@ -11,8 +11,15 @@ use Request;
 class AuthController extends Controller
 {
 
+
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => 'getLogout']);
+    }
+
     protected $redirectPath = '/dashboard';
     protected $redirectAfterLogout = '/auth/login';
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller

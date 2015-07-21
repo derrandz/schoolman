@@ -16,4 +16,15 @@ class Teacher extends Model
     {
     	return $this->hasManyThrough('Student', 'Class');
     }
+
+    public function updateAttributes(array $attributes)
+    {
+    	$this->fisrt_name = $attributes['first_name'];
+    	$this->last_name = $attributes['last_name'];
+    	$this->serialcode = $attributes['serialcode'];
+    	$this->birthdate = $attributes['birthdate'];
+    	$this->hiredate = $attributes['hiredate'];
+
+    	return $this->save();
+    }
 }

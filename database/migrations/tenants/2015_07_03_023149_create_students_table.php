@@ -15,10 +15,10 @@ class CreateStudentsTable extends Migration
      Schema::create('students', function(Blueprint $table) {
 
             $table->increments('id');
-            $table->integer('file_id')->unsigned();
-            $table->string('name');
-            $table->string('age');
-            $table->string('grade');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('serialcode');
+            $table->date('birthdate');
             $table->timestamps('created_at');
       });
     }

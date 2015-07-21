@@ -17,11 +17,12 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->integer('class_id')->unsigned();
             $table->string('description');
-            $table->timestamps();
 
             $table->foreign('class_id')
                   ->references('id')
                   ->on('classes');
+
+            $table->timestamps('created_at');
         });
     }
 

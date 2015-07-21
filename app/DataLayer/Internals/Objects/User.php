@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'school_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -40,6 +40,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function school()
     {
         return $this->belongsTo('School');
+    }
+
+    public function setSchool(School $school)
+    {
+        return $this->school()->save($school);
+    }
+
+    public function getMySchoolDatabaseName()
+    {
+        return $this->school->database->name;
     }
 
     public function create_file($name, $extension, $size, $path, $description)
@@ -78,5 +88,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      public function ScopeFind_by_name($query, $name)
      {
         return $query->whereName($name)->get();
+     }
+
+     public function role()
+     {
+        return $this->roles()->get()->first();
      }
 }

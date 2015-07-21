@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use DatabaseConnection;
+use Lang;
 
-class SetProperDatabase
+class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,11 @@ class SetProperDatabase
      */
     public function handle($request, Closure $next)
     {
-       $database_name = "";
-
-        $database_connection = new DatabaseConnection(['database' => $database_name]);
-
+        if( is_logged() )
+        {
+            flash('notice', Lang::has('auth.already-logged') ? Lang::get('auth.already-logged') : 'You are already logged (SET I8N)');
+            return RedirectToRoute('dashboard.index');
+        }
         return $next($request);
     }
 }

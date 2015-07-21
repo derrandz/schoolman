@@ -9,7 +9,7 @@ use View;
 use Session;
 use Lang;
 
-class RedirectIfNotAuthenticated
+class isAuthenticated
 {
 
     /**
@@ -41,9 +41,6 @@ class RedirectIfNotAuthenticated
     {
         if( !$this->auth->check() )
         {
-            Session::flash('flash_message', 'You have to be logged in first.');
-            Session::flash('flash_type', 'alert-warning');
-
             flash('warning', Lang::has('auth.access-denied')
                 ? Lang::get('auth.access-denied') : 'Set message');
             return \Redirect::route('auth.login');

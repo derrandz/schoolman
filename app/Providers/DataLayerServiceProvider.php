@@ -101,8 +101,28 @@ class DataLayerServiceProvider extends ServiceProvider
         ||
         |**********************************************
         */
-                    
 
+            $loader->alias('FilesRepository', 'App\DataLayer\Tenants\Repositories\FilesRepository');
+            $loader->alias('FilesRepoInterface', 'FilesRepository');
+
+            $loader->alias('TeachersRepository', 'App\DataLayer\Tenants\Repositories\TeachersRepository');
+            $loader->alias('TeachersRepoInterface', 'TeachersRepository');
+
+            $loader->alias('StudentsRepository', 'App\DataLayer\Tenants\Repositories\StudentsRepository');
+            $loader->alias('StudentsRepoInterface', 'StudentsRepository');
+
+            $loader->alias('ClassesRepository', 'App\DataLayer\Tenants\Repositories\ClassesRepository');
+            $loader->alias('ClassesRepoInterface', 'ClassesRepository');
+
+            $loader->alias('CoursesRepository', 'App\DataLayer\Tenants\Repositories\CoursesRepository');
+            $loader->alias('CoursesRepoInterface', 'CoursesRepository');
+
+            $loader->alias('ExamsRepository', 'App\DataLayer\Tenants\Repositories\ExamsRepository');
+            $loader->alias('ExamsRepoInterface', 'ExamsRepository');
+
+            $loader->alias('ResultsRepository', 'App\DataLayer\Tenants\Repositories\ResultsRepository');
+            $loader->alias('ResultsRepoInterface', 'ResultsRepository');
+            
         /*
         |**********************************************
         |Tenants

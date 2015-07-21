@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Motors;
+namespace App\Http\Controllers\Motors\Internals;
 
 use SchoolsRepoInterface;
+use Motor;
 
 class SchoolMotor extends Motor
 {

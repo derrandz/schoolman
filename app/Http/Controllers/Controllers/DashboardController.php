@@ -38,7 +38,10 @@ class DashboardController extends Controller
 {
     public function __construct(SchoolMotor $schools, UserMotor $users)
     {	
-		 $this->motors = array(
+        $this->middleware('isauth');
+        $this->middleware('role');
+        $this->middleware('set_central_database');
+        $this->motors = array(
 		 				"schools" => $schools, 
 						"users"   => $users,
 						);

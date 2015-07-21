@@ -10,7 +10,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Ces certificats ne correspondent pas à nos enregistrements',
-    'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
-    'access-denied' => 'Vous devez vous connecter d abords',
+    'failed'         => 'Ces certificats ne correspondent pas à nos enregistrements',
+    'throttle'       => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
+    'access-denied'  => 'Vous devez vous connecter d abords',
+    'already-logged' => 'Vous etes deja connectees.',
+    'access-permission-denied' => 'Vous ne disposez pas de privileges necessaires pour acceder a cet informations.',
+    'access-permission-granted' => 'Bonjour, tout privileges est bien verifie',
 ];

@@ -15,9 +15,11 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('serialcode');
             $table->integer('student_id')->unsigned();
             $table->integer('teacher_id')->unsigned();
             $table->string('year');
+            $table->string('grade');
             $table->date('starts_at');
 
             $table->foreign('student_id')

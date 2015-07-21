@@ -13,6 +13,11 @@ return [
     |
     */
 
-    'access-denied' => 'You have to be logged in first.'
-
+    'failed'         => 'These credentials do not match any of ours.',
+    'throttle'       => 'You have tried too many times, please retry later.',
+    'access-denied'  => 'You have to be logged in first',
+    'already-logged' => 'You are already logged in.',
+    'access-permission-denied' => 'You do not have the necessary privileges to acces to this data.',
+    'access-permission-granted' => 'Welcome, all privileges are granted.',
+];
 ];

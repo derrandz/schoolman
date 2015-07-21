@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use DatabaseConnection;
 
-class SetProperDatabase
+class SetCentralDatabase
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,7 @@ class SetProperDatabase
      */
     public function handle($request, Closure $next)
     {
-       $database_name = "";
-
-        $database_connection = new DatabaseConnection(['database' => $database_name]);
-
+        set_database(['database' => 'central_database']);
         return $next($request);
     }
 }

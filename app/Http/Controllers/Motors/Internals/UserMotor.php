@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Motors;
+namespace App\Http\Controllers\Motors\Internals;
 
 use UsersRepoInterface;
 use RolesRepoInterface;
@@ -9,6 +9,7 @@ use Validator;
 use Lang;
 
 use Illuminate\Http\Request;
+use Motor;
 
 
 class UserMotor extends Motor
