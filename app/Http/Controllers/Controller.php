@@ -23,8 +23,7 @@ abstract class Controller extends BaseController
     {
     	if( !(Auth::check()) )
 		{
-    		Session::flash('flash_message', 'You have to be logged in');
-    		Session::flash('flash_type', 'alert-warning');
+    		flash('warning', 'You have to be logged in first');
     		return Redirect::to('auth/login');
     	}
     }

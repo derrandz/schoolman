@@ -119,6 +119,14 @@ Route::get('dashboard/users',[
 						  	
 						  	]);
 
+//Get
+Route::get('dashboard/users/create',[
+							
+							'as' 	=> 'dashboard.users.create',
+						  	'uses' 	=> 'Controllers\DashboardController@getUsersCreate'
+
+						  	]);
+
 //Show
 Route::get('dashboard/users/{id}',[
 
@@ -126,21 +134,12 @@ Route::get('dashboard/users/{id}',[
 							'uses' => 'Controllers\DashboardController@getUsersShow'
 								]);
 
-//Get
-Route::get('dashboard/users/create',[
-							
-							'as' 	=> 'dashboard.users.create',
-						  	'uses' 	=> 'Controllers\DashboardController@getUsersCreate
-						  	
-						  	']);
-
 //Post
 Route::post('dashboard/users/store',[
 							
 							'as' 	=> 'dashboard.users.store',
-						  	'uses' 	=> 'Controllers\DashboardController@postUsersStore
-						  	
-						  	']);
+						  	'uses' 	=> 'Controllers\DashboardController@postUsersStore'
+						  		]);
 
 //edit
 Route::get('dashboard/users/{id}/edit',[

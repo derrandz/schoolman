@@ -53,7 +53,9 @@ class DataLayerServiceProvider extends ServiceProvider
 
             $loader->alias('DatabasesInstancesRepository', 'App\DataLayer\Internals\Repositories\DatabasesInstancesRepository');
             $loader->alias('DatabasesInstancesRepoInterface', 'DatabasesInstancesRepository');
-       
+
+            $loader->alias('RolesRepository', 'App\DataLayer\Internals\Repositories\RolesRepository');
+            $loader->alias('RolesRepoInterface', 'RolesRepository');       
         /*
         |**********************************************
         |Internals
@@ -71,6 +73,7 @@ class DataLayerServiceProvider extends ServiceProvider
             $loader->alias('Database', 'App\DataLayer\Internals\Objects\Database'); 
             $loader->alias('Permission','App\DataLayer\Internals\Objects\Permission');                                   
             $loader->alias('Role','App\DataLayer\Internals\Objects\Role');      
+            $loader->alias('App\Http\Models\Role','Role');      
 
             $loader->alias('App\User','User'); //*Notes
 

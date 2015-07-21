@@ -4,9 +4,14 @@ namespace App\DataLayer\Internals\Repositories;
 
 use CRUDInterface;
 use User;
+use Role;
 
 class UsersRepository implements CRUDInterface
 {
+
+    public $attributes = ['name', 'email', 'password'];
+
+
     public function all()
     {
     	return User::all();
@@ -23,7 +28,7 @@ class UsersRepository implements CRUDInterface
 
     public function find($id)
     {
-    	return School::find($id);
+    	return User::find($id);
     }
 
     public function update($id, $params = array())
@@ -40,5 +45,12 @@ class UsersRepository implements CRUDInterface
     {
         $user = User::find($id);
         return $user->delete();
+    }
+
+    public function createWithRole(array $params, Role $role)
+    {
+        $creation = $user = $this->create($params);
+        $role_att = $user->attachRole($role);
+        return $creation;
     }
 }

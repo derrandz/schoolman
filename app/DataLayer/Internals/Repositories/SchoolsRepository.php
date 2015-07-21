@@ -10,7 +10,6 @@ class SchoolsRepository implements CRUDInterface
 {
     public $attributes = ['name', 'code'];
 
-
     public function all()
     {
     	return School::all();

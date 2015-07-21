@@ -10,6 +10,30 @@ use App\Http\Controllers\Controller;
 use SchoolMotor;
 use UserMotor;
 
+    /*
+    |
+    | Motors that implement the CRUDtrait have all crud actions with views ready, so you can call them 
+    | out of box.
+    |
+    | Also, Motors have access to the data layer, and can provide you with the data you need from the database,
+    | for instance, you will want to create your own index with multiple 'models', simly use :
+    |
+    |   $this->motors['motorname']->model->all()
+    |
+    |
+    | Each motor's model have a basic crud set of functions to handle your crud needs
+    | including : 
+    |           all()
+    |           create()
+    |           find()
+    |           update()
+    |           destroy()
+    |
+    | For more info, dwelve into the datalayer directory after having gone through the source code of 
+    | motors a bit, hopefully you can get a sight of this.
+    |
+    */
+    
 class DashboardController extends Controller
 {
     public function __construct(SchoolMotor $schools, UserMotor $users)
@@ -19,30 +43,6 @@ class DashboardController extends Controller
 						"users"   => $users,
 						);
     }
-
-    /*
-    |
-	| Motors that implement the CRUDtrait have all crud actions with views ready, so you can call them 
-	| out of box.
-	|
-	| Also, Motors have access to the data layer, and can provide you with the data you need from the database,
-	| for instance, you will want to create your own index with multiple 'models', simly use :
-	|
-	|	$this->motors['motorname']->model->all()
-	|
-	|
-	| Each motor's model have a basic crud set of functions to handle your crud needs
-	| including : 
-	|			all()
-	|			create()
-	|			find()
-	|			update()
-	|			destroy()
-	|
-	| For more info, dwelve into the datalayer directory after having gone through the source code of 
-	| motors a bit, hopefully you can get a sight of this.
-	|
-	*/
 
     public function getIndex()
     {
@@ -116,12 +116,12 @@ class DashboardController extends Controller
 
     public function getUsersCreate()
     {
-    	return $this->motors['users']->create();
+    	return $this->motors['users']->createWithRoles();
     }
 
-    public function postUsersStore()
+    public function postUsersStore(Request $request)
     {
-    	return $this->motors['users']->store();
+    	return $this->motors['users']->storeWithRoles($request);
     }
 
     public function getUsersEdit($id)
