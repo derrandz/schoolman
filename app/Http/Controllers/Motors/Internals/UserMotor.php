@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Motors\Internals;
 
 use UsersRepoInterface;
 use RolesRepoInterface;
+use SchoolsRepoInterface;
 use Input;
 use Validator;
 use Lang;
@@ -17,11 +18,13 @@ class UserMotor extends Motor
 	use \CRUDtrait;
 
 
-	public function __construct(UsersRepoInterface $model, RolesRepoInterface $supmodel)
+	public function __construct(UsersRepoInterface $model, RolesRepoInterface $supmodel1, SchoolsRepoInterface $supmodel2)
 	{
 		$this->model = $model;
-		$this->supmodel = $supmodel;
+		$this->supmodel1 = $supmodel1;
+		$this->supmodel2 = $supmodel2;
 		$this->view = 'users';
+		$this->routePrefix = 'dashboard';
 	}
 
 
@@ -40,32 +43,30 @@ class UserMotor extends Motor
        	return $validator->fails();
 	}
 	
-	public function createWithRoles()
+	public function createWithRolesAndSchool()
 	{
-		$roles_ids   = '' ; 
-		$roles_names = '' ; 
+		$selectArrayRole = IdAndNameSymArray($this->supmodel1);
+		$selectArraySchool = IdAndNameSymArray($this->supmodel2);
 
-		foreach($this->supmodel->all() as $role)
+		if( current_user_role() != 'SUPERADMIN' )
 		{
-			$roles_ids[]   =  $role->id;
-			$roles_names[] =  $role->name;
+			foreach($selectArrayRole as $key => $role)
+			{
+				if($role == 'SUPERADMIN')
+				{
+					unset($selectArrayRole[$key]);
+				}
+			}
+
+		return view($this->view.'.create', ['roles' => $selectArrayRole]);
 		}
-
-		$selectArray = array();
-		$i           = 0;
-
-		foreach($roles_ids as $roleid)
-		{
-			$selectArray[ (string)$roleid ] = $roles_names[$i];
-			$i++;
-		}
-
-		return view($this->view.'.create', ['roles' => $selectArray]);
+		
+		return view($this->view.'.create', ['roles' => $selectArrayRole, 'schools' => $selectArraySchool]);
 	}
 
-	public function storeWithRoles(Request $request)
+	public function storeOverriden(Request $request)
 	{
-		$role         = $this->supmodel->find(Input::get('role'));
+		$role         = $this->supmodel1->find(Input::get('role'));
 
 		$attributes   = $this->model->attributes;
 		$data         = getInput($attributes);
@@ -73,17 +74,17 @@ class UserMotor extends Motor
 		if( $failed = $this->validate($request->all()) )
 		{
 			flash('danger', (Lang::has('crud.create-failure') ? Lang::get('crud.create-failure') : 'Set message'));
-			return $this->createWithRoles();
+			return $this->createWithRolesAndSchool();
 		}
 
 		if( !( $this->model->createWithRole($data, $role) ) )
 		{
 			flash('danger', (Lang::has('crud.create-failure') ? Lang::get('crud.create-failure') : 'Set message'));
-			return $this->createWithRoles();
+			return $this->createWithRolesAndSchool();
 		}
 
 		flash('success', (Lang::has('crud.create-success') ? Lang::get('crud.create-success') : 'Set message'));
-		return RedirectToRoute('dashboard.schools.create', ['all' => $this->model->all()]);
+		return RedirectToRoute($this->routePrefix.'.'.$this->view.'.create', ['all' => $this->model->all()]);
 
 	}
 }

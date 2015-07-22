@@ -11,5 +11,6 @@ class SchoolMotor extends Motor
 	{
 		$this->model = $model;
 		$this->view = 'schools';
+		$this->routePrefix = 'dashboard';
 	}
 }

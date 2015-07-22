@@ -8,19 +8,29 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use TeacherMotor;
+use FileMotor;
 
 class SchoolsManagerController extends Controller
 {
-    public function __construct(TeacherMotor $teachers)
+    public function __construct(TeacherMotor $teachers, FileMotor $files)
     {
+        $this->middleware('set_school_id');
         $this->middleware('isauth');
         $this->middleware('set_proper_database');
         
     	$this->motors = array(
-		 				"teachers" => $teachers, 
+		 				"teachers" => $teachers,
+                        "files"    => $files, 
 						);
     }
 
+/*
+|
+|
+| Teachers Actions
+|
+|
+*/
     public function getTeachersIndex()
     {
         return $this->motors['teachers']->index();
@@ -60,5 +70,53 @@ class SchoolsManagerController extends Controller
     {
     	return $this->motors['teachers']->destroy($id);
     }
+
+/*
+|
+|
+| Files Actions
+|
+|
+*/
+    public function getFilesIndex()
+    {
+        return $this->motors['files']->index();
+    }
+
+    public function getFilesShow($id)
+    {
+        return $this->motors['files']->show($id);
+    }
+
+    public function getFilesCreate()
+    {
+        return $this->motors['files']->create();
+    }
+
+    public function postFilesStore()
+    {
+        return $this->motors['files']->store();
+    }
+
+    public function getFilesEdit($id)
+    {
+        return $this->motors['files']->edit($id);
+    }
+
+    public function putFilesUpdate($id)
+    {
+        return $this->motors['files']->update($id);
+    }
+    
+    public function getFilesDelete($id)
+    {
+        return $this->motors['files']->delete($id);
+    }
+
+    public function deleteFilesDestroy($id)
+    {
+        return $this->motors['files']->destroy($id);
+    }
+
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataLayer\Tenants\Objects\Tenants;
+namespace App\DataLayer\Tenants\Objects;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -134,13 +134,13 @@ class DataLayerServiceProvider extends ServiceProvider
         |**********************************************
         */
 
-                $loader->alias('File', 'App\DataLayer\Objects\Tenants\File');
-                $loader->alias('Student', 'App\DataLayer\Objects\Tenants\Student');             
-                $loader->alias('Teacher', 'App\DataLayer\Objects\Tenants\Teacher');             
-                $loader->alias('Class','App\DataLayer\Objects\Tenants\Class');
-                $loader->alias('Exam','App\DataLayer\Objects\Tenants\Exam');
-                $loader->alias('Course','App\DataLayer\Objects\Tenants\Course');
-                $loader->alias('Result','App\DataLayer\Objects\Tenants\Result');
+                $loader->alias('File', 'App\DataLayer\Tenants\Objects\File');
+                $loader->alias('Student', 'App\DataLayer\Tenants\Objects\Student');             
+                $loader->alias('Teacher', 'App\DataLayer\Tenants\Objects\Teacher');             
+                $loader->alias('Class','App\DataLayer\Tenants\Objects\Class');
+                $loader->alias('Exam','App\DataLayer\Tenants\Objects\Exam');
+                $loader->alias('Course','App\DataLayer\Tenants\Objects\Course');
+                $loader->alias('Result','App\DataLayer\Tenants\Objects\Result');
         });
     }
 }

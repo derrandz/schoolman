@@ -32,8 +32,7 @@ class CheckForRole
             break;
 
             case "ADMIN":
-
-                if($getControllerName == 'SchoolsManagerController')
+                if($controller == 'SchoolsManagerController')
                 {
                     return true;
                 }
@@ -82,13 +81,20 @@ class CheckForRole
 
     public function handle($request, Closure $next)
     {
+        if( !is_logged() )
+        {
+            flash_lang('notice', 'access-denied');
+            return RedirectToRoute('auth.login');
+        }
+
         if( !($this->access_granted) )
         {
             flash_lang('danger', 'auth.access-permission-denied', 'set lang message');
+            return RedirectToRoute('tenants.teachers.index');
+            
         }
 
         flash_lang('success', 'auth.access-permission-granted', 'set lang message');
-
         return $next($request);
     }
 }

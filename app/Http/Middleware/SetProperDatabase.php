@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use DatabaseConnection;
+use SchoolsRepoInterface;
 
 class SetProperDatabase
 {
@@ -16,9 +17,22 @@ class SetProperDatabase
      */
     public function handle($request, Closure $next)
     {
-       $database_name = "";
+        $authUserRole = current_user_role();
 
-        $database_connection = new DatabaseConnection(['database' => $database_name]);
+        if( $authUserRole == 'SUPERADMIN' )
+        {
+            $school_id = $request->school_id;
+            
+            $school = SchoolsRepoHelperFind($school_id, new SchoolsRepoInterface);
+
+            $database_connection = new DatabaseConnection(['database' => $school->database->name]);
+        }
+        else
+        {
+            $database_name = current_user_database();
+
+            $database_connection = new DatabaseConnection(['database' => $database_name]);
+        }
 
         return $next($request);
     }

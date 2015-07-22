@@ -33,18 +33,14 @@ class UsersRepository implements CRUDInterface
 
     public function update($id, $params = array())
     {
-        $user           = User::find($id);
-        $user->name     = $params['name'];
-        $user->email    = $params['email'];
-        $user->password = bcrypt($params['password']);
+        $user            = User::find($id);
+        $user->name      = $params['name'];
+        $user->email     = $params['email'];
+        $user->password  = bcrypt($params['password']);
+        $user->school_id = $params['school_id'];
 
         return $user->save();
-    }
 
-    public function destroy($id)
-    {
-        $user = User::find($id);
-        return $user->delete();
     }
 
     public function createWithRole(array $params, Role $role)
@@ -53,4 +49,11 @@ class UsersRepository implements CRUDInterface
         $role_att = $user->attachRole($role);
         return $creation;
     }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        return $user->delete();
+    }
+
 }

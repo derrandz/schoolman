@@ -14,6 +14,6 @@ return [
     'throttle'       => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
     'access-denied'  => 'Vous devez vous connecter d abords',
     'already-logged' => 'Vous etes deja connectees.',
-    'access-permission-denied' => 'Vous ne disposez pas de privileges necessaires pour acceder a cet informations.',
-    'access-permission-granted' => 'Bonjour, tout privileges est bien verifie',
+    'access-permission-denied' => 'Vous ne disposez pas de privileges necessaires pour acceder a ces informations.',
+    'access-permission-granted' => 'Bonjour, vos privileges ont ete bien verifiees.',
 ];

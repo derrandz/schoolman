@@ -7,8 +7,10 @@ use App\Http\Controllers\Traits\CRUDtrait;
 abstract class Motor
 {
 	protected $model;
-	protected $supmodel;
+	protected $supmodel1;
+	protected $supmodel2;
 	protected $view;
+	protected $routePrefix;
 
 	public function getRepo()
 	{

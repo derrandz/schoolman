@@ -34,5 +34,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'set_central_database' => \App\Http\Middleware\SetCentralDatabase::class,
         'role' => \App\Http\Middleware\CheckForRole::class,
+        'set_school_id' => \App\Http\Middleware\SetSchoolId::class,
     ];
 }

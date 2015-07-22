@@ -9,7 +9,8 @@ class TeacherMotor extends Motor
 {
 	public function __construct(TeachersRepoInterface $model)
 	{
-		$this->model = $model;
-		$this->view = 'teachers';
+		$this->model       = $model;
+		$this->view        = 'teachers';
+		$this->routePrefix = 'tenants';
 	}
 }

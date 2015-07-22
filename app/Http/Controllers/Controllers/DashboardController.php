@@ -38,7 +38,6 @@ class DashboardController extends Controller
 {
     public function __construct(SchoolMotor $schools, UserMotor $users)
     {	
-        $this->middleware('isauth');
         $this->middleware('role');
         $this->middleware('set_central_database');
         $this->motors = array(
@@ -119,12 +118,12 @@ class DashboardController extends Controller
 
     public function getUsersCreate()
     {
-    	return $this->motors['users']->createWithRoles();
+    	return $this->motors['users']->createWithRolesAndSchool();
     }
 
     public function postUsersStore(Request $request)
     {
-    	return $this->motors['users']->storeWithRoles($request);
+    	return $this->motors['users']->storeOverriden($request);
     }
 
     public function getUsersEdit($id)

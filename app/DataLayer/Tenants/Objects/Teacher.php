@@ -1,11 +1,13 @@
 <?php
 
-namespace App\DataLayer\Tenants\Objects\Tenants;
+namespace App\DataLayer\Tenants\Objects;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
+
+    protected $fillable = ['first_name', 'last_name', 'serialcode', 'birthdate', 'hiredate'];
 
 	public function classes()
 	{

@@ -50,6 +50,13 @@ $route_partials = [
 		|
 		*/
 		'tenant_teachers_routes',
+		
+		/*
+		|
+		|Files Motor Routes
+		|
+		*/
+		'tenant_files_routes',
 ];
 
 

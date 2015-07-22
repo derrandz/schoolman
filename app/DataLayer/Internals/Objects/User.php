@@ -72,9 +72,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $id;
     }
 
-    public function is_admin()
+    public function is_superadmin()
     {
-        return $this->hasRole(['admin']);
+        return $this->hasRole(['SUPERADMIN']);
     }
 
     /*
@@ -94,4 +94,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      {
         return $this->roles()->get()->first();
      }
+
+     public function database_name()
+     {
+        if( !$this->is_superadmin() )
+        {
+            return $this->school->database->name;
+        }
+
+        return 'central_database';
+     }
+
+    public function school_id()
+    {
+        if( !$this->is_superadmin() )
+        {
+            return $this->school->id;
+        }
+
+        return -1;
+    }
 }

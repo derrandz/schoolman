@@ -48,6 +48,11 @@ use Illuminate\Container\Container;
         return $role->name;
     }
 
+    function currentUserIsSuperAdmin()
+    {
+        return current_user_role() == 'SUPERADMIN';
+    }
+
     function current_database()
     {
         if( !empty(DatabaseConnection::$instances) )
@@ -67,7 +72,8 @@ use Illuminate\Container\Container;
             return 'Not logged in to set database';
         }
 
-        return $database->name;
+
+        return $database;
     }
 
 
@@ -168,4 +174,99 @@ use Illuminate\Container\Container;
     function flash_lang($type, $lang, $default = null)
     {
         flash($type, Lang::has($lang) ? Lang::get($lang) : ($default ? $default : 'The default message was not set') );
+    }
+
+    function SchoolsRepoHelperFind($id,SchoolsRepoInterface $school)
+    {
+        return $school->find($id);
+    }
+
+    function TenantSchool()
+    {
+        $request = app()->request;
+        /*
+        |
+        | This function returns the name of the school in which the management will take place.
+        | Mainly for the SUPERADMIN as to make the actions appear on the dashboard,
+        | This function might only stay for development time.
+        |
+        */
+        $school_id   = $request->school_id;
+        if( !( is_null($school_id) ) )
+        {
+            $flag             = false;
+
+            $current_database = current_database();
+
+            if( $current_database != 'central_database' )
+            {
+                set_database(['database' => 'central_database']);
+                $flag = true;
+            }
+
+            $school = SchoolsRepoHelperFind($school_id, new SchoolsRepoInterface);
+
+            if($flag)
+            {
+                set_database(['database' => $school->database->name]);
+            }
+            
+            return $school;
+        }    
+        
+        return null;
+    }
+
+    function TenantSchoolName()
+    {
+        if(!(is_null(TenantSchool())))
+        {
+            return TenantSchool()->name;
+        }
+
+        return null;
+    }
+
+    function TenantSchoolId()
+    {
+       if(!(is_null(TenantSchool())))
+        {
+            return TenantSchool()->id;
+        }
+
+        return null;
+    }
+
+    function CurrentTenantSchoolId()
+    {
+        return SessionsHelper::getAuthSchoolId();
+    }
+
+    function setRequestSchoolId($id)
+    {
+        SessionsHelper::SetAuthSchoolId($id);
+    }
+
+    function IdAndNameSymArray($models)
+    {
+        $ids   = '' ; 
+        $names = '' ; 
+
+        foreach($models->all() as $model)
+        {
+            $ids[]   =  $model->id;
+            $names[] =  $model->name;
+        }
+
+        $selectArray = array();
+        $i           = 0;
+
+        foreach($ids as $modelid)
+        {
+            $selectArray[ (string)$modelid ] = $names[$i];
+            $i++;
+        }
+
+        return $selectArray;
+
     }

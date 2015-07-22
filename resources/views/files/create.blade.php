@@ -8,7 +8,7 @@
             <div class="content">
                 <div class="content">
 
-                    {!! Form::open(['route'=> 'files.store',
+                    {!! Form::open(['route'=> 'tenants.files.store',
                                       'method' => 'POST',
                                       'class' => 'dropzone',
                                       'id'  => 'my-awesome-dropzone',

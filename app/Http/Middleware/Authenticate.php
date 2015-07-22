@@ -41,8 +41,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                Session::flash('flash_message', 'You have to be logged in first.');
-                Session::flash('flash_type', 'alert-warning');
+                flash_lang('warning', 'auth.access-denied', 'Default Message');
                 return redirect()->guest('auth/login');
             }
         }

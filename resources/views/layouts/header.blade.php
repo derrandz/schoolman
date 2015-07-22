@@ -7,13 +7,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">PedagoManager</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="/dashboard/index">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="#">Link 1e</a></li>
+            <li><a href="#">Link 2e</a></li>
+            <li><a href="#">Link 3e</a></li>
            @if( !is_logged() )
             <li><a href="/auth/login">Login</a></li>
            @else
@@ -22,9 +24,6 @@
            <li><a href="#"><strong style="color:green;"><?= current_user() ?></strong></a></li>
            <li><a href="#"><strong style="color:green;"><?= current_user_role() ?></strong></a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>

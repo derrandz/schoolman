@@ -12,65 +12,65 @@
 
 
 //Index
-Route::get('tenants/teachers',[
+Route::get('schools/{school_id}/tenants/teachers',[
 
-									'as'   => 'tenant.teachers.index',
-									'uses' => 'Controllers\SchoolManagerController@getTeachersIndex'
+									'as'   => 'tenants.teachers.index',
+									'uses' => 'Controllers\SchoolsManagerController@getTeachersIndex'
 	
 												]);
 
 //Create
-Route::get('tenants/teachers/create',[
+Route::get('schools/{school_id}/tenants/teachers/create',[
 
-									'as'   => 'tenant.teachers.create',
-									'uses' => 'Controllers\SchoolManagerController@getTeachersCreate'
+									'as'   => 'tenants.teachers.create',
+									'uses' => 'Controllers\SchoolsManagerController@getTeachersCreate'
 	
 												]);
 
 //Show
-Route::get('tenants/teachers/{id}',[
+Route::get('schools/{school_id}/tenants/teachers/{id}',[
 
-									'as'   => 'tenant.teachers.show',
-									'uses' => 'Controllers\SchoolManagerController@getTeachersShow'
+									'as'   => 'tenants.teachers.show',
+									'uses' => 'Controllers\SchoolsManagerController@getTeachersShow'
 	
 												]);
 
 //Store
-Route::post('tenants/teachers/store',[
+Route::post('schools/{school_id}/tenants/teachers/store',[
 
-									'as'   => 'tenant.teachers.store',
-									'uses' => 'Controllers\SchoolManagerController@postTeachersStore'
+									'as'   => 'tenants.teachers.store',
+									'uses' => 'Controllers\SchoolsManagerController@postTeachersStore'
 	
 												]);
 
 //edit
-Route::get('tenants/teachers/{id}/edit',[
+Route::get('schools/{school_id}/tenants/teachers/{id}/edit',[
 
-									'as'   => 'tenant.teachers.edit',
-									'uses' => 'Controllers\SchoolManagerController@getTeachersEdit'
+									'as'   => 'tenants.teachers.edit',
+									'uses' => 'Controllers\SchoolsManagerController@getTeachersEdit'
 	
 												]);
 
 //update
-Route::put('tenants/teachers/{id}/update',[
+Route::put('schools/{school_id}/tenants/teachers/{id}/update',[
 
-									'as'   => 'tenant.teachers.update',
-									'uses' => 'Controllers\SchoolManagerController@putTeachersUpdate'
+									'as'   => 'tenants.teachers.update',
+									'uses' => 'Controllers\SchoolsManagerController@putTeachersUpdate'
 	
 												]);
 
 //Delete
-Route::get('tenants/teachers/{id}/delete',[
+Route::get('schools/{school_id}/tenants/teachers/{id}/delete',[
 
-									'as'   => 'tenant.teachers.delete',
-									'uses' => 'Controllers\SchoolManagerController@getTeachersDelete'
+									'as'   => 'tenants.teachers.delete',
+									'uses' => 'Controllers\SchoolsManagerController@getTeachersDelete'
 	
 												]);
 
 //Destroy
-Route::delete('tenants/teachers/{id}/destroy',[
+Route::delete('schools/{school_id}/tenants/teachers/{id}/destroy',[
 
-									'as'   => 'tenant.teachers.destroy',
-									'uses' => 'Controllers\SchoolManagerController@deleteTeachersDestroy'
+									'as'   => 'tenants.teachers.destroy',
+									'uses' => 'Controllers\SchoolsManagerController@deleteTeachersDestroy'
 	
 												]);
