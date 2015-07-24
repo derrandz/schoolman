@@ -50,7 +50,44 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/twitter-bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script>
+
+
+function currentDatabaseFieldUpdate()
+{
+  $('p#current_database').replaceWith('<?php echo current_database() ?>');
+  alert('replaced');
+}
+
+// $(document).ready(function() {
+
+//             $("#setdatabase").submit(function(e) {
+//               e.preventDefault();
+//                  $.ajaxSetup({
+//                     headers: {
+//                         'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+//                     }
+//                 });
+
+//                 $.ajax({
+//                     url: '/dashboard/sidebar/setdatabase',
+//                     type: 'POST',
+//                     dataType: 'JSON',
+//                     data: $('form#setdatabase').serialize(),
+//                     success: function()
+//                     {
+//                       currentDatabaseFieldUpdate();
+//                     }
+//                 });
+//               e.preventDefault();
+
+//             });
+
+//         });
+
+</script>
   </body>
 </html>

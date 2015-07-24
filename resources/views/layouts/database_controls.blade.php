@@ -1,1 +1,1 @@
- <p>Current Database <strong style="color:green;"><?php echo current_database() ?></strong></p> 
+ <p id="current_database">Current Database <strong style="color:green;"><?php echo current_database() ?></strong></p> 

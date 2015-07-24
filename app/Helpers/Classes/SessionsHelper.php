@@ -67,6 +67,11 @@ class SessionsHelper extends Model
         return Session::get('school_id');
     }
 
+    public static function setAuthDatabaseName($name)
+    {
+        Session::put('database', $name);
+    }
+
     public static function setAuthSchoolId($id)
     {
         Session::put('school_id', $id);

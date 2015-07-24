@@ -22,7 +22,7 @@
                       <tbody>
                         @foreach($all as $teacher)
                         <tr>
-                          <td>{!! Html::linkRoute('tenants.teachers.show', $teacher->id, array('id' => $teacher->id, 'school_id' => TenantSchoolId() ) ) !!}</td>
+                          <td>{!! Html::linkRoute('tenants.teachers.show', $teacher->id, array('id' => $teacher->id, 'school_id' => CurrentTenantSchoolId()) ) !!}</td>
                           <td><?= $teacher->first_name ?></td>
                           <td><?= $teacher->last_name ?></td>
                           <td><?= $teacher->serialcode ?></td>
@@ -30,7 +30,7 @@
                           <td><?= $teacher->hiredate ?></td>
                           <td>
                              {!! Form::open( array(
-                                                    'route' => array('tenants.teachers.destroy','school_id' => TenantSchoolId(), "id" => $teacher->id )
+                                                    'route' => array('tenants.teachers.destroy', "school_id" => CurrentTenantSchoolId(), "id" => $teacher->id )
                                                     , 'method' => 'DELETE')) !!}
                             {!! csrf_field() !!}
 

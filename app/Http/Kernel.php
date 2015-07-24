@@ -18,7 +18,8 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
-        \App\Http\Middleware\InitSessions::class,       
+        \App\Http\Middleware\InitSessions::class,  
+        \App\Http\Middleware\SetSchoolId::class,     
     ];
 
     /**
@@ -33,7 +34,5 @@ class Kernel extends HttpKernel
         'isauth' => \App\Http\Middleware\isAuthenticated::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'set_central_database' => \App\Http\Middleware\SetCentralDatabase::class,
-        'role' => \App\Http\Middleware\CheckForRole::class,
-        'set_school_id' => \App\Http\Middleware\SetSchoolId::class,
-    ];
+        'role' => \App\Http\Middleware\CheckForRole::class,    ];
 }

@@ -5,6 +5,7 @@ namespace App\DataLayer\Internals\Repositories;
 use CRUDInterface;
 use SchoolsFactory;
 use School;
+use DB;
 
 class SchoolsRepository implements CRUDInterface
 {
@@ -41,5 +42,10 @@ class SchoolsRepository implements CRUDInterface
     {
         $school = School::find($id);
         return $school->delete();
+    }
+
+    public function findQuery($id)
+    {
+        return DB::table('schools')->where('id', '=', $id)->first();
     }
 }

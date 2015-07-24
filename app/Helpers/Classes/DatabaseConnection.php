@@ -9,6 +9,7 @@ use Dispatcher;
 use Container;
 use Capsule;
 use Database;
+use DatabasesInstancesRepoInterface;
 
 class DatabaseConnection extends Model
 {
@@ -67,7 +68,7 @@ class DatabaseConnection extends Model
 		}
 
 		Config::set("database.connections.$database", $default);
-		
+
 		$capsule = new Capsule;
 		$capsule->addConnection($default);
 		$capsule->setEventDispatcher(new Dispatcher(new Container));
@@ -81,6 +82,65 @@ class DatabaseConnection extends Model
 		return $this->connection;
 	}
 
+	public static function getConfig($driver)
+	{
+		if($driver != 'central_database')
+		{
+
+			if(!( DatabaseConnection::DoesDbExist($driver) ))
+			{
+				return null;
+			}
+		}
+
+		if( !is_null( $config = Config::get("database.connections.$driver") ) )
+		{
+			return $config;
+		}
+		
+		$newConnection = new DatabaseConnection(['database' => $driver]);
+		$db            = $newConnection->getConnection()->getDatabaseName();
+		$config        = Config::get("database.connections.$db");
+
+		return $config;
+	}
+
+	public static function connectTo($database)
+	{
+		if(!is_null($config = DatabaseConnection::getConfig($database) ))
+		{
+			$default = $config;
+
+			$capsule = new Capsule;
+			
+			$capsule->addConnection($default);
+			
+			$capsule->setEventDispatcher(new Dispatcher(new Container));
+			$capsule->setAsGlobal();
+			$capsule->bootEloquent();
+
+			setCurrentDatabaseName($database);
+
+			return $default;
+		}
+
+		return null;
+	}
+
+	public static function DoesDbExist($dbName)
+	{
+		$databases = (new DatabasesInstancesRepoInterface)->allNamesQuery();
+
+		foreach ($databases as $db) 
+		{
+			if($db == $dbName)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 	/**
 	 * Get the on the fly connection.
 	 *

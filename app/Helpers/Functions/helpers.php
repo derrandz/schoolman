@@ -23,7 +23,7 @@ use Illuminate\Container\Container;
     {
     	return SessionsHelper::isLogged();
     }
-
+    
     function current_user()
     {
         $current_user = SessionsHelper::getAuthUser();
@@ -48,6 +48,16 @@ use Illuminate\Container\Container;
         return $role->name;
     }
 
+    function current_url()
+    {
+        return app()->request->url;
+    }
+
+    function current_route()
+    {
+        return app()->request->route;
+    }
+
     function currentUserIsSuperAdmin()
     {
         return current_user_role() == 'SUPERADMIN';
@@ -55,9 +65,19 @@ use Illuminate\Container\Container;
 
     function current_database()
     {
-        if( !empty(DatabaseConnection::$instances) )
+        $connectionsArray = DatabaseConnection::$instances;
+
+        if( !empty($connectionsArray) )
         {
-            return end(DatabaseConnection::$instances)->getConnection()->getDatabaseName();
+            if(($database_name =  current_user_database()) != "NotDbSetNotLoggedInYet" )
+            {
+                if(getControllerName() != 'DashboardController')
+                {
+                    return getCurrentDatabaseName();
+                }
+
+                return 'central_database';
+            }
         }
 
         return DB::connection()->getDatabaseName();
@@ -69,19 +89,16 @@ use Illuminate\Container\Container;
 
         if( $database == 'empty' || is_null($database))
         {
-            return 'Not logged in to set database';
+            return 'NotDbSetNotLoggedInYet';
         }
-
-
+        
         return $database;
     }
 
 
     function set_database($params)
     {
-        $connection = new DatabaseConnection($params);
-
-        return $connection['database'];
+        return DatabaseConnection::connectTo($params['database']);
     }
 
 
@@ -171,14 +188,19 @@ use Illuminate\Container\Container;
         return Redirect::route($route)->with($params);
     }
 
-    function flash_lang($type, $lang, $default = null)
+    function flash_lang($type, $lang, $params = null, $default = null)
     {
-        flash($type, Lang::has($lang) ? Lang::get($lang) : ($default ? $default : 'The default message was not set') );
+        flash($type, Lang::has($lang) ? Lang::get($lang, $params ? $params : []) : ($default ? $default : 'The default message was not set') );
     }
 
     function SchoolsRepoHelperFind($id,SchoolsRepoInterface $school)
     {
         return $school->find($id);
+    }    
+
+    function SchoolsRepoHelperFindQuery($id, SchoolsRepoInterface $school)
+    {
+        return $school->findQuery($id);
     }
 
     function TenantSchool()
@@ -192,26 +214,25 @@ use Illuminate\Container\Container;
         |
         */
         $school_id   = $request->school_id;
+
         if( !( is_null($school_id) ) )
         {
-            $flag             = false;
 
             $current_database = current_database();
 
-            if( $current_database != 'central_database' )
+            if($school_id == -1)
             {
-                set_database(['database' => 'central_database']);
-                $flag = true;
+                return $school_id;
             }
 
-            $school = SchoolsRepoHelperFind($school_id, new SchoolsRepoInterface);
+            $school = SchoolsRepoHelperFindQuery($school_id, new SchoolsRepoInterface);
 
-            if($flag)
+            if( !is_null(set_database(['database' => "database_of_$school->name"])))
             {
-                set_database(['database' => $school->database->name]);
+                return $school;
             }
             
-            return $school;
+            return null;
         }    
         
         return null;
@@ -219,9 +240,9 @@ use Illuminate\Container\Container;
 
     function TenantSchoolName()
     {
-        if(!(is_null(TenantSchool())))
+        if(!(is_null($tenantschool = TenantSchool())))
         {
-            return TenantSchool()->name;
+            return $tenantschool->name;
         }
 
         return null;
@@ -229,9 +250,9 @@ use Illuminate\Container\Container;
 
     function TenantSchoolId()
     {
-       if(!(is_null(TenantSchool())))
+       if(!(is_null($tenantschool = TenantSchool())))
         {
-            return TenantSchool()->id;
+            return $tenantschool->id;
         }
 
         return null;
@@ -240,6 +261,16 @@ use Illuminate\Container\Container;
     function CurrentTenantSchoolId()
     {
         return SessionsHelper::getAuthSchoolId();
+    }
+
+    function setCurrentDatabaseName($name)
+    {
+        SessionsHelper::SetAuthDatabaseName($name);
+    }
+
+    function getCurrentDatabaseName()
+    {
+        return SessionsHelper::getAuthDatabase();
     }
 
     function setRequestSchoolId($id)
@@ -269,4 +300,44 @@ use Illuminate\Container\Container;
 
         return $selectArray;
 
+    }
+
+    function isTenantSchoolSet()
+    {
+        if(CurrentTenantSchoolId() == -1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    function selectArray($models)
+    {
+        $ids   = '' ; 
+        $names = '' ; 
+
+        foreach($models as $model)
+        {
+            $ids[]   =  $model->id;
+            $names[] =  $model->name;
+        }
+
+        $selectArray = array();
+        $i           = 0;
+
+        foreach($ids as $modelid)
+        {
+            $selectArray[ (string)$modelid ] = $names[$i];
+            $i++;
+        }
+
+        return $selectArray;
+
+    }
+
+    function getSchoolsArray()
+    {
+        $schools = DB::table('schools')->get();
+        return selectArray($schools);
     }

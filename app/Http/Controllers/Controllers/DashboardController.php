@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Input;
+use Response;
 use SchoolMotor;
 use UserMotor;
 
@@ -146,4 +148,8 @@ class DashboardController extends Controller
     	return $this->motors['users']->destroy($id);
     }
 
+    public function setDatabase()
+    {
+       return $this->setDatabaseId();
+    }
 }

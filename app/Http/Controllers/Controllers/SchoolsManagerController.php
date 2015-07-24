@@ -14,7 +14,6 @@ class SchoolsManagerController extends Controller
 {
     public function __construct(TeacherMotor $teachers, FileMotor $files)
     {
-        $this->middleware('set_school_id');
         $this->middleware('isauth');
         $this->middleware('set_proper_database');
         

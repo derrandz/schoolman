@@ -74,7 +74,7 @@ class CheckForRole
 
             break;
 
-            default: dd('There was no registered role!'); break;
+            default: return false; break;
         }
     }
 
@@ -89,12 +89,12 @@ class CheckForRole
 
         if( !($this->access_granted) )
         {
-            flash_lang('danger', 'auth.access-permission-denied', 'set lang message');
+            flash_lang('danger', 'role.access-denied', null, 'set lang message');
             return RedirectToRoute('tenants.teachers.index');
             
         }
 
-        flash_lang('success', 'auth.access-permission-granted', 'set lang message');
+        flash_lang('success', 'role.access-granted', ['role' => current_user_role()], 'set Message');
         return $next($request);
     }
 }

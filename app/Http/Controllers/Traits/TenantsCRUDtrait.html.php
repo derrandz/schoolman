@@ -13,7 +13,7 @@ use Redirect;
 |
 |
 */
-trait CRUDtrait
+trait TenantsCRUDtrait
 {
 
 	public function index()

@@ -29,3 +29,10 @@ Route::get('/error', function () {
 
 Route::get('dashboard/index', ['as' => 'dashboard.index',
 									'uses' => 'Controllers\DashboardController@getIndex']);
+
+Route::post('dashboard/sidebar/setdatabase', [
+
+									'as'   => 'dashboard.sidebar.setdatabase',
+									'uses' => 'Controllers\DashboardController@setDatabase'
+										   
+											]);

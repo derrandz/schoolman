@@ -19,12 +19,19 @@ abstract class Controller extends BaseController
 
     protected $motors = array();
     
-    public function is_logged()
+    private function is_logged()
     {
     	if( !(Auth::check()) )
 		{
     		flash('warning', 'You have to be logged in first');
     		return Redirect::to('auth/login');
     	}
+    }
+
+    private function setDatabaseId()
+    {
+            $school_id = Input::get('school_id');
+            setRequestSchoolId($school_id);
+            return RedirectToRoute('tenants.teachers.index');
     }
 }

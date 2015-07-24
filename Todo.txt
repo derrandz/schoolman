@@ -7,3 +7,11 @@ populate database for roles
 create middlewares for roles and permissions
 set manual crud per permission and set the scenarios
 proceed to files formats.
+
+/*
+*
+
+*
+Working on ajax setting db
+
+couldnt find a way to make that call doable from all cross the website

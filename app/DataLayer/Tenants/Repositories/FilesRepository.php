@@ -4,6 +4,8 @@ namespace App\DataLayer\Tenants\Repositories;
 
 use CRUDInterface;
 use File;
+use TeachersRepoInterface;
+use Excel;
 
 class FilesRepository implements CRUDInterface
 {
@@ -39,18 +41,18 @@ class FilesRepository implements CRUDInterface
 
     public function getUploadAttributes($file)
 	{
-	    $size = $file->getClientSize();
-	    $extension = $file->guessExtension();
-	    $filename = 'file_uploaded_at_'.time().'_'.$file->getClientOriginalName();
-	    $destinationPath = public_path().'/uploads'.'/file_upload_'.time();
-	    $fullPath = $destinationPath.'/'.$filename;
-	    $description = 'This should be description';
+        $size            = $file->getClientSize();
+        $extension       = $file->guessExtension();
+        $filename        = 'file_uploaded_at_'.time().'_'.$file->getClientOriginalName();
+        $destinationPath = public_path().'/uploads'.'/file_upload_'.time();
+        $fullPath        = $destinationPath.'/'.$filename;
+        $description     = 'This should be description';
 
 	    return array(
 					'filename'        => $filename, 
 					'destinationPath' => $destinationPath, 
 					'extension'       => $extension, 
-					'fullPath'        => $fullPath, 
+					'path'            => $fullPath, 
 					'size'            => $size, 
 					'description'     => $description
 	    			);
@@ -61,8 +63,30 @@ class FilesRepository implements CRUDInterface
 	    $file->move($attrs['destinationPath'], $attrs['filename']);    	
     }
     
-    public function populateDatabaseFromFile($file_id)
+    public function seedTeachersFromFile($file_id)
     {
-    	$file = $this->find($file_id);
+        $teachersModel = new TeachersRepoInterface;
+
+        $file = $this->find($file_id);
+        $path = $file->path;
+
+        $my_file = Excel::load($path);
+        $results = $my_file->get();
+        
+        foreach($results as $sheets)
+        {
+            foreach($sheets as $row)
+            {
+                $teacher = $teachersModel->create([
+                                                    'first_name' => $row['first_name'],
+                                                    'last_name'  => $row['last_name'],
+                                                    'serialcode' => $row['serialcode'],
+                                                    'birthdate'  => $row['birthdate'],
+                                                    'hiredate'   => $row['hiredate'],
+                                                ]);
+            }
+        }
+
+        return true;
     }
 }

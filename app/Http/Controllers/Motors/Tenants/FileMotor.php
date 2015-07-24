@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Motors\Tenants;
 
 use FilesRepoInterface;
 use Motor;
+use Response;
 
 class FileMotor extends Motor
 {
@@ -14,31 +15,46 @@ class FileMotor extends Motor
 		$this->routePrefix = 'tenants';
 	}
 
+	protected function ValidateFileAndSave($files)
+	{
+		foreach($files as $file)
+		{
+			if( !$file->isValid() )
+			{
+	            return Response::json("Invalid file", 500);
+			}
+
+			$attrs = $this->model->getUploadAttributes($file);
+			
+			$this->model->upload($file, 
+									[
+									'destinationPath' => $attrs['destinationPath'], 
+									'filename'        => $attrs['filename'],
+								]);
+        
+            $fileObj = $this->model->create($attrs);
+
+            if( !$this->model->seedTeachersFromFile($fileObj->id) )	
+            {
+            	echo 'Failed to populate database';
+            }
+		}
+
+		return Response::json("Successful Upload and save", 200);
+	}
+
 	public function store()
 	{
 		$request = app()->request;
-		if(!$request->hasFile('file'))
+
+		//If there was no file added but still proceeded for the store action.
+		if( !$request->hasFile('file') )
 		{
             return Response::json("Failed to retrieve files from request", 500);
 		}
 
-		foreach($files as $file)
-		{
-			if( $file->isValid() )
-			{
-				$attrs = $this->model->getUploadAttributes($file);
-				$this->model->upload($file, [
-											'destinationPath' => $attr['destinationPath'], 
-											'filename'        => $attrs['filename']
-											]);
-                $this->model->create($attrs);	
-                return Response::json("Success", 200);
+		$files = $request->files;
 
-			}
-			else
-			{
-	            return Response::json("Invalid file", 500);
-			}
-		}
+		return $this->ValidateFileAndSave($files);
 	}
 }
