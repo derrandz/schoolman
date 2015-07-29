@@ -34,7 +34,11 @@
             "App\\": "app/"
         },
         "files" : [
-            "app/Helpers/Functions/helpers.php"
+            "app/Helpers/Functions/admin.php",
+            "app/Helpers/Functions/current.php",
+            "app/Helpers/Functions/database.php",
+            "app/Helpers/Functions/repohelpers.php",
+            "app/Helpers/Functions/general.php"
         ]
     },
     "autoload-dev": {

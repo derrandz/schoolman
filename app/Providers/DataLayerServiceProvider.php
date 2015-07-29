@@ -74,6 +74,7 @@ class DataLayerServiceProvider extends ServiceProvider
             $loader->alias('Permission','App\DataLayer\Internals\Objects\Permission');                                   
             $loader->alias('Role','App\DataLayer\Internals\Objects\Role');      
             $loader->alias('App\Http\Models\Role','Role');      
+            $loader->alias('App\Http\Models\Permission','Permission');      
 
             $loader->alias('App\User','User'); //*Notes
 
@@ -111,8 +112,8 @@ class DataLayerServiceProvider extends ServiceProvider
             $loader->alias('StudentsRepository', 'App\DataLayer\Tenants\Repositories\StudentsRepository');
             $loader->alias('StudentsRepoInterface', 'StudentsRepository');
 
-            $loader->alias('ClassesRepository', 'App\DataLayer\Tenants\Repositories\ClassesRepository');
-            $loader->alias('ClassesRepoInterface', 'ClassesRepository');
+            $loader->alias('SeminarRepository', 'App\DataLayer\Tenants\Repositories\SeminarRepository');
+            $loader->alias('SeminarRepoInterface', 'SeminarRepository');
 
             $loader->alias('CoursesRepository', 'App\DataLayer\Tenants\Repositories\CoursesRepository');
             $loader->alias('CoursesRepoInterface', 'CoursesRepository');
@@ -137,8 +138,8 @@ class DataLayerServiceProvider extends ServiceProvider
                 $loader->alias('File', 'App\DataLayer\Tenants\Objects\File');
                 $loader->alias('Student', 'App\DataLayer\Tenants\Objects\Student');             
                 $loader->alias('Teacher', 'App\DataLayer\Tenants\Objects\Teacher');             
-                $loader->alias('Class','App\DataLayer\Tenants\Objects\Class');
-                $loader->alias('Exam','App\DataLayer\Tenants\Objects\Exam');
+                $loader->alias('Exam', 'App\DataLayer\Tenants\Objects\Exam');             
+                $loader->alias('Seminar','App\DataLayer\Tenants\Objects\Seminar');
                 $loader->alias('Course','App\DataLayer\Tenants\Objects\Course');
                 $loader->alias('Result','App\DataLayer\Tenants\Objects\Result');
         });

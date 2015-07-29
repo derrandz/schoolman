@@ -82,11 +82,13 @@ class DatabaseConnection extends Model
 		return $this->connection;
 	}
 
+	
+
+
 	public static function getConfig($driver)
 	{
 		if($driver != 'central_database')
 		{
-
 			if(!( DatabaseConnection::DoesDbExist($driver) ))
 			{
 				return null;
@@ -105,9 +107,12 @@ class DatabaseConnection extends Model
 		return $config;
 	}
 
-	public static function connectTo($database)
+	
+
+
+	public static function connectTo($params)
 	{
-		if(!is_null($config = DatabaseConnection::getConfig($database) ))
+		if(!is_null($config = DatabaseConnection::getConfig($params['database']) ))
 		{
 			$default = $config;
 
@@ -119,7 +124,7 @@ class DatabaseConnection extends Model
 			$capsule->setAsGlobal();
 			$capsule->bootEloquent();
 
-			setCurrentDatabaseName($database);
+			setCurrentUserDatabaseName($params['database']);
 
 			return $default;
 		}
@@ -127,10 +132,12 @@ class DatabaseConnection extends Model
 		return null;
 	}
 
+	
+
+
 	public static function DoesDbExist($dbName)
 	{
 		$databases = (new DatabasesInstancesRepoInterface)->allNamesQuery();
-
 		foreach ($databases as $db) 
 		{
 			if($db == $dbName)

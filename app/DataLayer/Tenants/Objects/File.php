@@ -46,4 +46,40 @@ class File extends Model
     }
 
 
+    public function isFormatValid($format)
+    {
+        $my_file = Excel::load($this->path);
+        $results = $my_file->get();
+        
+        $rows = $results[0][0];
+
+        foreach($format as $row)
+        {
+            if( !isset($rows[$row]) )
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function isFormatValidOnAllSheets($sheetsCount, $format)
+    {
+
+    }
+
+    public function isFormatValidOnEachSheet($sheetsCount, $formats)
+    {
+        $i = 1;
+        
+        $my_file = Excel::load($this->path);
+        $results = $my_file->get();
+
+        while ($i <= $sheetCount) 
+        {
+            //continue later.
+        }
+    }
+
 }

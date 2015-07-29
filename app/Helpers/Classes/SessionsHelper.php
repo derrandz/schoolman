@@ -14,6 +14,8 @@ class SessionsHelper extends Model
         return Session::get('is_init');
     }
 
+    
+
     public static function init()
     {
     	Session::put('user', 'empty');
@@ -24,14 +26,27 @@ class SessionsHelper extends Model
         Session::put('is_init', true);
     }
 
+    
+
     public static function registerLogin()
     {
     	Session::put('user', Auth::user() );
         Session::put('role', Auth::user()->role() );
-        Session::put('database', Auth::user()->database_name() );
-        Session::put('school_id', Auth::user()->school_id());
-    	Session::put('is_auth', true);
+        Session::put('is_auth', true);
+                
+        if( Auth::user()->is_superadmin() )
+        {
+            Session::put('database', 'central_database' );
+            Session::put('school_id', -1);
+        }
+        else
+        {
+            Session::put('database', Auth::user()->database_name() );
+            Session::put('school_id', Auth::user()->school_id());            
+        }
     }
+
+    
 
     public static function registerLogout()
     {
@@ -42,38 +57,67 @@ class SessionsHelper extends Model
     	Session::put('is_auth', false);	
     }
 
+    
+
     public static function isLogged()
     {
     	return Session::get('is_auth');
     }
+
+    
 
     public static function getAuthUser()
     {
     	return Session::get('user');
     }
 
-    public static function getAuthRole()
+    
+
+    public static function getAuthUserRole()
     {
         return Session::get('role');
     }
 
-    public static function getAuthDatabase()
+    
+
+    public static function getAuthUserDatabase()
     {
         return Session::get('database');
     }
 
-    public static function getAuthSchoolId()
+    
+
+    public static function getAuthUserSchoolId()
     {
         return Session::get('school_id');
     }
 
-    public static function setAuthDatabaseName($name)
+    
+
+    public static function setAuthUserDatabaseName($name)
     {
         Session::put('database', $name);
     }
 
-    public static function setAuthSchoolId($id)
+    public static function setAuthUserSchoolId($id)
     {
         Session::put('school_id', $id);
+    }
+
+
+    public static function saveUploadedFiles(array $ids)
+    {
+        Session::put('files', $ids);
+    }
+
+
+    public static function getUploadedFilesIds()
+    {
+        return Session::get('files');
+    }
+
+    public static function forgetUploadedFiles()
+    {
+        Session::put('files', null);
     }
 }

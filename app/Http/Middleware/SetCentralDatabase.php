@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use SchoolsRepoInterface;
 
 class SetCentralDatabase
 {
@@ -13,9 +14,35 @@ class SetCentralDatabase
      * @param  \Closure  $next
      * @return mixed
      */
+
+    protected function ActionIsSetDatabase()
+    {
+        $actionName = getActionName();
+
+        if( $actionName != 'setDatabase' )
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public function handle($request, Closure $next)
     {
-        set_database(['database' => 'central_database']);
+        if(!$this->ActionIsSetDatabase())
+        {
+            connectToDatabase(['database' => 'central_database']);
+        }
+        else
+        {
+            if(!is_null($database = getDatabasNameOfSchool($request->school_id)))
+            {
+                $database_name = $database;
+            }
+
+            connectToDatabase(['database' => $database_name]);
+        }
+
         return $next($request);
     }
 }

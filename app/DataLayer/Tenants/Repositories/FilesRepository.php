@@ -28,15 +28,15 @@ class FilesRepository implements CRUDInterface
 
     public function update($id, $params)
     {
-        $teacher = File::find($id);
+        $file = File::find($id);
 
-	    return $teacher->updateAttributes($params);
+	    return $file->updateAttributes($params);
     }
 
     public function destroy($id)
     {
-        $teacher = File::find($id);
-        return $teacher->delete();
+        $file = File::find($id);
+        return $file->delete();
     }
 
     public function getUploadAttributes($file)
@@ -89,4 +89,61 @@ class FilesRepository implements CRUDInterface
 
         return true;
     }
+
+
+
+
+    public function seedStudentsFromFile($file_id)
+    {
+        $teachersModel = new TeachersRepoInterface;
+
+        $file = $this->find($file_id);
+        $path = $file->path;
+
+        $my_file = Excel::load($path);
+        $results = $my_file->get();
+        
+        foreach($results as $sheets)
+        {
+            foreach($sheets as $row)
+            {
+                $teacher = $teachersModel->create([
+                                                    'first_name' => $row['first_name'],
+                                                    'last_name'  => $row['last_name'],
+                                                    'serialcode' => $row['serialcode'],
+                                                    'hiredate'   => $row['hiredate'],
+                                                ]);
+            }
+        }
+
+        return true;
+    }
+
+    public function seedSeminarsFromFile($file_id)
+    {
+        $teachersModel = new TeachersRepoInterface;
+
+        $file = $this->find($file_id);
+        $path = $file->path;
+
+        $my_file = Excel::load($path);
+        $results = $my_file->get();
+        
+        foreach($results as $sheets)
+        {
+            foreach($sheets as $row)
+            {
+                $teacher = $teachersModel->create([
+                                                    'first_name' => $row['name'],
+                                                    'serialcode'  => $row['serialcode'],
+                                                    'serialcode' => $row['serialcode'],
+                                                    'birthdate'  => $row['birthdate'],
+                                                    'hiredate'   => $row['hiredate'],
+                                                ]);
+            }
+        }
+
+        return true;
+    }
+
 }

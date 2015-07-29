@@ -16,7 +16,7 @@ class CreateResultsTable extends Migration
             $table->increments('id');
             $table->float('score');
             $table->integer('exam_id')->unsigned();
-            $table->string('Rating', 3);
+            $table->string('rating', 3);
             $table->timestamps();
 
             $table->foreign('exam_id')

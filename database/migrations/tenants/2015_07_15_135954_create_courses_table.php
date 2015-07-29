@@ -15,12 +15,12 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('class_id')->unsigned();
+            $table->integer('seminar_id')->unsigned();
             $table->string('description');
 
-            $table->foreign('class_id')
+            $table->foreign('seminar_id')
                   ->references('id')
-                  ->on('classes');
+                  ->on('seminars');
 
             $table->timestamps('created_at');
         });

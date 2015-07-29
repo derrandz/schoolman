@@ -18,11 +18,11 @@ class Student extends Model
 
     public function classes()
     {
-    	return $this->hasMany('Class');
+    	return $this->hasMany('Seminar');
     }
 
     public function teachers()
     {
-    	return $this->hasManyThrough('Teacher', 'Class');
+    	return $this->hasManyThrough('Teacher', 'Seminar');
     }
 }

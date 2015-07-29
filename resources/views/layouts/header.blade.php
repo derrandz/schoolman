@@ -11,18 +11,17 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/dashboard/index">Dashboard</a></li>
+
+           @if( is_logged() )
+            <li><a href="/admin/dashboard">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#">Link 1e</a></li>
-            <li><a href="#">Link 2e</a></li>
-            <li><a href="#">Link 3e</a></li>
-           @if( !is_logged() )
-            <li><a href="/auth/login">Login</a></li>
-           @else
             <li><a href="/auth/logout">Logout</a></li>
+            <li><a href="#"><strong style="color:green;"><?= CurrentUser() ?></strong></a></li>
+            <li><a href="#"><strong style="color:green;"><?= CurrentUserRole() ?></strong></a></li>
+           @else
+           <li><a href="#"><p style="color:white"><strong>Please login</strong></p></a></li>
+            <li><a href="/auth/login">Login</a></li>
            @endif
-           <li><a href="#"><strong style="color:green;"><?= current_user() ?></strong></a></li>
-           <li><a href="#"><strong style="color:green;"><?= current_user_role() ?></strong></a></li>
           </ul>
         </div>
       </div>

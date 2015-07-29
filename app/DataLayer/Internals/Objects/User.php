@@ -85,7 +85,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      |
      */
 
-     public function ScopeFind_by_name($query, $name)
+     public static function ScopeFind_by_name($query, $name)
      {
         return $query->whereName($name)->get();
      }
@@ -114,4 +114,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return -1;
     }
+
+    public function getMyRolesIds()
+    {
+        $myArray = array();
+
+        foreach($this->roles as $role)
+        {
+            $myArray = $role->id;
+        }
+
+        return $myArray;
+    }
+
+    public function detachMyRoles()
+    {
+        $myRole = Role::find( $this->getMyRolesIds() );
+
+        $this->detachRole($myRole);
+
+        $this->save();
+    }
+
 }

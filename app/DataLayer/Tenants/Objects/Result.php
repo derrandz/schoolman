@@ -8,6 +8,6 @@ class Result extends Model
 {
     public function exams()
     {
-    	return $this->belongsTo('Exams');
+    	return $this->belongsTo('Exam');
     }
 }

@@ -47,7 +47,7 @@ class ControllersServiceProvider extends ServiceProvider
             $loader->alias('UserMotor', 'App\Http\Controllers\Motors\Internals\UserMotor');
             $loader->alias('TeacherMotor', 'App\Http\Controllers\Motors\Tenants\TeacherMotor');
             $loader->alias('StudentMotor', 'App\Http\Controllers\Motors\Tenants\StudentMotor');
-            $loader->alias('ClassMotor', 'App\Http\Controllers\Motors\Tenants\ClassMotor');
+            $loader->alias('SeminarMotor', 'App\Http\Controllers\Motors\Tenants\SeminarMotor');
             $loader->alias('CourseMotor', 'App\Http\Controllers\Motors\Tenants\CourseMotor');
             $loader->alias('ExamMotor', 'App\Http\Controllers\Motors\Tenants\ExamMotor');
             $loader->alias('ResultMotor', 'App\Http\Controllers\Motors\Tenants\ResultMotor');

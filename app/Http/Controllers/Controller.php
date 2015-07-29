@@ -6,12 +6,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Auth;
-use Session;
 use Redirect;
-use DatabaseConnection;
-use OrganismSetup;
-use Response;
-use Teacher;
+use Input;
 
 abstract class Controller extends BaseController
 {
@@ -19,7 +15,7 @@ abstract class Controller extends BaseController
 
     protected $motors = array();
     
-    private function is_logged()
+    protected function is_logged()
     {
     	if( !(Auth::check()) )
 		{
@@ -28,10 +24,22 @@ abstract class Controller extends BaseController
     	}
     }
 
-    private function setDatabaseId()
+    protected function setDatabaseId()
     {
-            $school_id = Input::get('school_id');
-            setRequestSchoolId($school_id);
-            return RedirectToRoute('tenants.teachers.index');
+        /*
+        |
+                Gets the selected school id from select input
+        |
+                Sets is to the admin's request school id 
+        |
+
+        |
+        */
+
+        $school_id = Input::get('school_id');
+
+        setRequestSchoolId($school_id);
+        
+        return RedirectToRoute('admin.schoolmanager');
     }
 }

@@ -58,35 +58,105 @@
 
 function currentDatabaseFieldUpdate()
 {
-  $('p#current_database').replaceWith('<?php echo current_database() ?>');
-  alert('replaced');
+  $('p#current_database').replaceWith('<?php echo ActualDatabase() ?>');
 }
+var model;
 
-// $(document).ready(function() {
+@if( ActionIsCreateTeachersFromFiles() )
+  model = 'teachers';
 
-//             $("#setdatabase").submit(function(e) {
-//               e.preventDefault();
-//                  $.ajaxSetup({
-//                     headers: {
-//                         'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-//                     }
-//                 });
+  $(document).ready(function() {
 
-//                 $.ajax({
-//                     url: '/dashboard/sidebar/setdatabase',
-//                     type: 'POST',
-//                     dataType: 'JSON',
-//                     data: $('form#setdatabase').serialize(),
-//                     success: function()
-//                     {
-//                       currentDatabaseFieldUpdate();
-//                     }
-//                 });
-//               e.preventDefault();
 
-//             });
+            $("#create-"+model).submit(function(e) {
+              e.preventDefault();
+                 $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                    }
+                });
+                
+                $.ajax({
+                    url: '/schools/{school_id}/files/store_'+model,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: $('form#create-'+model).serialize(),
+                    success: function()
+                    {
+                      showSuccessButton();
+                    }
+                });
+              e.preventDefault();
 
-//         });
+            });
+
+        });
+
+@else
+  @if( ActionIsCreateStudentsFromFiles() )
+    model = 'students';
+
+ $(document).ready(function() {
+
+
+            $("#create-"+model).submit(function(e) {
+              e.preventDefault();
+                 $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                    }
+                });
+                
+                $.ajax({
+                    url: '/schools/{school_id}/files/store_'+model,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: $('form#create-'+model).serialize(),
+                    success: function()
+                    {
+                      showSuccessButton();
+                    }
+                });
+              e.preventDefault();
+
+            });
+
+        });
+
+  @else
+    @if( ActionIsCreateClassesFromFiles() )
+      model = 'classes';
+
+     $(document).ready(function() {
+
+
+            $("#create-"+model).submit(function(e) {
+              e.preventDefault();
+                 $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                    }
+                });
+                
+                $.ajax({
+                    url: '/schools/{school_id}/files/store_'+model,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: $('form#create-'+model).serialize(),
+                    success: function()
+                    {
+                      showSuccessButton();
+                    }
+                });
+              e.preventDefault();
+
+            });
+
+        });
+
+    @endif
+  @endif
+@endif
 
 </script>
   </body>

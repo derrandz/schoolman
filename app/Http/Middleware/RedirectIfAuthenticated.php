@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
         if( is_logged() )
         {
             flash('notice', Lang::has('auth.already-logged') ? Lang::get('auth.already-logged') : 'You are already logged (SET I8N)');
-            return RedirectToRoute('dashboard.index');
+            return RedirectToRoute('admin.index');
         }
         return $next($request);
     }

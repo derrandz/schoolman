@@ -27,12 +27,14 @@ Route::get('/error', function () {
 |
 */
 
-Route::get('dashboard/index', ['as' => 'dashboard.index',
+Route::group(['prefix' => 'admin'], function()
+{
+	Route::get('dashboard', ['as' => 'admin.index',
 									'uses' => 'Controllers\DashboardController@getIndex']);
 
-Route::post('dashboard/sidebar/setdatabase', [
+	Route::get('schoolmanager', ['as' => 'admin.schoolmanager',
+										'uses' => 'Controllers\SchoolsManagerController@getDashboard']);
 
-									'as'   => 'dashboard.sidebar.setdatabase',
-									'uses' => 'Controllers\DashboardController@setDatabase'
-										   
-											]);
+	Route::post('sidebar/setdatabase', ['as' => 'admin.sidebar.setdatabase',
+										'uses' => 'Controllers\DashboardController@setDatabase']);
+});

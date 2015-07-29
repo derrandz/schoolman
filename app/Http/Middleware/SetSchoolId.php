@@ -15,7 +15,7 @@ class SetSchoolId
      */
     public function handle($request, Closure $next)
     {
-        $request->school_id = CurrentTenantSchoolId();
+        $request->school_id = CurrentUserSchoolId();
         return $next($request);
     }
 }

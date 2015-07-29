@@ -34,7 +34,7 @@ trait CRUDtrait
 		if( ! ( $instance = $this->model->find($id) ))
 		{
 			flash('warning', "There is no such record in our database!");
-			return RedirectToRoute($this->routePrefix.'.'.$this->view.'.index', [ 'all' => $this->model->all() ]);
+			return RedirectToRoute($this->routePrefix.'.'.$this->modelName.'.index', [ 'all' => $this->model->all() ]);
 		}
 
 		return view($this->view.'.show', ['instance' => $instance]);
@@ -53,11 +53,11 @@ trait CRUDtrait
 
 		if($this->view == "schools") //treating a special case, real bad practice, will be replaced soon enough.
 		{
-			set_database(['central_database']);
+			connectToDatabase(['central_database']);
 		}
 
 		flash('success', (Lang::has('crud.create-success') ? Lang::get('crud.create-success') : 'Set message'));
-		return RedirectToRoute($this->routePrefix.'.'.$this->view.'.create', ['all' => $this->model->all()]);
+		return RedirectToRoute($this->routePrefix.'.'.$this->modelName.'.create', ['all' => $this->model->all()]);
 
 	}
 
@@ -81,7 +81,7 @@ trait CRUDtrait
 
 		flash('success', (Lang::has('crud.update-success') ? Lang::get('crud.update-success') : 'Set message'));
 
-		return RedirectToRoute($this->routePrefix.'.'.$this->view.'index',['all' => $this->model->all()]);
+		return RedirectToRoute($this->routePrefix.'.'.$this->modelName.'.index',['all' => $this->model->all()]);
 	}
 
 	public function delete($id)
@@ -100,7 +100,7 @@ trait CRUDtrait
 		}
 
 		flash('success', (Lang::has('crud.destroy-success') ? Lang::get('crud.destroy-success') : 'Set message'));
-		return RedirectToRoute($this->routePrefix.'.'.$this->view.'.index', ['all' => $this->model->all()]);
+		return RedirectToRoute($this->routePrefix.'.'.$this->modelName.'.index', ['all' => $this->model->all()]);
 	}
 
 }

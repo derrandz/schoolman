@@ -18,30 +18,33 @@ class SetProperDatabase
     public function handle($request, Closure $next)
     {
 
-        $authUserRole = current_user_role();
+        $authUserRole = CurrentUserRole();
 
         if( $authUserRole == 'SUPERADMIN' )
         {
-            $school_id = $request->school_id;
+            $school_id     = $request->school_id;
             $database_name = '';
 
             if($school_id != -1)
             {
-                $school        = SchoolsRepoHelperFind($school_id, new SchoolsRepoInterface);                
-                $database_name =  $school->database->name;
+                $database = getDatabasNameOfSchool($school_id);
+                $database_name =  $database->name;
+
             }
             else
             {
-                $database_name = 'database_of_school_1'; //Only for testing
-                //You'll have to change this so some automatic way of setting the proper database;
+                $database_name = getDatabasNameOfSchool($school_id);
+                dd($database_name);
+
             }
-            $database_connection = set_database(['database' => $database_name]);
+
+            $database_connection = connectToDatabase(['database' => $database_name]);
         }
         else
         {
-            $database_name = current_user_database();            
+            $database_name = getCurrentUserDatabaseName();            
 
-            $database_connection = set_database(['database' => $database_name]);
+            $database_connection = connectToDatabase(['database' => $database_name]);
         }
 
         return $next($request);

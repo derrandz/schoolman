@@ -33,8 +33,6 @@ class SchoolsRepository implements CRUDInterface
         $school->name = $params['name'];
         $school->code = $params['code'];
 
-        $school->update_database($params['name']);
-
         return $school->save();
     }
 

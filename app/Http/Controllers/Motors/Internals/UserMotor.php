@@ -15,6 +15,7 @@ use Motor;
 
 class UserMotor extends Motor
 {
+	protected $modelName = 'users';
 	use \CRUDtrait;
 
 
@@ -23,18 +24,35 @@ class UserMotor extends Motor
 		$this->model = $model;
 		$this->supmodel1 = $supmodel1;
 		$this->supmodel2 = $supmodel2;
-		$this->view = 'users';
-		$this->routePrefix = 'dashboard';
+		$this->view = 'internals.users';
+		$this->modelName = 'users';
+		$this->routePrefix = 'admin';
 	}
 
 
 	protected function validator(array $data)
 	{
-		return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+		switch($data['_method'])
+		{
+			case 'POST':
+			{		
+				return Validator::make($data, [
+		            'name' => 'required|max:255',
+		            'email' => 'required|email|max:255|unique:users',
+		            'password' => 'required|confirmed|min:6',
+		        ]);
+
+			}
+			case 'PUT':
+			{
+				$user = $this->model->find($data['id']);
+				return Validator::make($data, [
+		            'name' => 'required|max:255',
+		            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+		            'password' => 'required|confirmed|min:6',
+		        ]);
+			}
+		}
 	}
 
 	protected function validate(array $data)
@@ -48,7 +66,7 @@ class UserMotor extends Motor
 		$selectArrayRole = IdAndNameSymArray($this->supmodel1);
 		$selectArraySchool = IdAndNameSymArray($this->supmodel2);
 
-		if( current_user_role() != 'SUPERADMIN' )
+		if( CurrentUserRole() != 'SUPERADMIN' )
 		{
 			foreach($selectArrayRole as $key => $role)
 			{
@@ -84,7 +102,53 @@ class UserMotor extends Motor
 		}
 
 		flash('success', (Lang::has('crud.create-success') ? Lang::get('crud.create-success') : 'Set message'));
-		return RedirectToRoute($this->routePrefix.'.'.$this->view.'.create', ['all' => $this->model->all()]);
+		return RedirectToRoute($this->routePrefix.'.'.$this->modelName.'.create', ['all' => $this->model->all()]);
 
 	}
+
+	public function editWithRolesAndSchool($id)
+	{
+		$selectArrayRole = IdAndNameSymArray($this->supmodel1);
+		$selectArraySchool = IdAndNameSymArray($this->supmodel2);
+
+		if( CurrentUserRole() != 'SUPERADMIN' )
+		{
+			foreach($selectArrayRole as $key => $role)
+			{
+				if($role == 'SUPERADMIN')
+				{
+					unset($selectArrayRole[$key]);
+				}
+			}
+
+		return view($this->view.'.edit', ['roles' => $selectArrayRole,'instance' => $this->model->find($id)]);
+		}//this prevents non super admins from creating a superadmin.
+		
+		return view($this->view.'.edit', ['roles' => $selectArrayRole, 'schools' => $selectArraySchool, 'instance' => $this->model->find($id)]);
+	}
+	
+	public function UpdateOverriden(Request $request)
+	{
+		$role         = $this->supmodel1->find(Input::get('role'));
+
+		$attributes   = $this->model->attributes;
+		$data         = getInput($attributes);		
+
+		if( $failed = $this->validate($request->all()) )
+		{
+			flash('danger', (Lang::has('crud.create-failure') ? Lang::get('crud.create-failure') : 'Set message'));
+			return $this->editWithRolesAndSchool($request->id);
+		}
+
+		if( !( $this->model->UpdateWithRole($request->id, $data, $role) ) )
+		{
+			flash('danger', (Lang::has('crud.create-failure') ? Lang::get('crud.create-failure') : 'Set message'));
+			return $this->editWithRolesAndSchool($request->id);
+		}
+
+		flash('success', (Lang::has('crud.create-success') ? Lang::get('crud.create-success') : 'Set message'));
+		return $this->index();
+
+	}
+
 }

@@ -14,24 +14,14 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>1</th>
-                          <th>2</th>
-                          <th>3</th>
-                          <th>4</th>
+                          <th>School</th>
+                          <th>Number of Students</th>
                         </tr>
                       </thead>
                       <tbody>
                        <tr>
-                         <td>1</td>
-                         <td>2</td>
-                         <td>3</td>
-                         <td>4</td>
-                       </tr>
-                        <tr>
-                         <td>1</td>
-                         <td>2</td>
-                         <td>3</td>
-                         <td>4</td>
+                         <td>School Name</td>
+                         <td>121</td>
                        </tr>
                       </tbody>
                     </table>

@@ -9,14 +9,14 @@ class Teacher extends Model
 
     protected $fillable = ['first_name', 'last_name', 'serialcode', 'birthdate', 'hiredate'];
 
-	public function classes()
+	public function seminars()
 	{
-		return $this->hasMany('Class');
+		return $this->hasMany('Seminar');
 	}
 	
     public function students()
     {
-    	return $this->hasManyThrough('Student', 'Class');
+    	return $this->hasManyThrough('Student', 'Seminar');
     }
 
     public function updateAttributes(array $attributes)

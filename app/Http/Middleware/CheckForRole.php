@@ -25,7 +25,7 @@ class CheckForRole
     {
         $controller = getControllerName();
 
-        switch ( current_user_role() ) 
+        switch ( CurrentUserRole() ) 
         {
             case "SUPERADMIN":
                 return true;
@@ -90,11 +90,11 @@ class CheckForRole
         if( !($this->access_granted) )
         {
             flash_lang('danger', 'role.access-denied', null, 'set lang message');
-            return RedirectToRoute('tenants.teachers.index');
+            return RedirectToRoute('schools.teachers.index');
             
         }
 
-        flash_lang('success', 'role.access-granted', ['role' => current_user_role()], 'set Message');
+        flash_lang('success', 'role.access-granted', ['role' => CurrentUserRole()], 'set Message');
         return $next($request);
     }
 }

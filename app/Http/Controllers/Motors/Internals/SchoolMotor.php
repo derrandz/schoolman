@@ -9,8 +9,9 @@ class SchoolMotor extends Motor
 {
 	public function __construct(SchoolsRepoInterface $model)
 	{
-		$this->model = $model;
-		$this->view = 'schools';
-		$this->routePrefix = 'dashboard';
+		$this->model       = $model;
+		$this->view        = 'internals.schools';
+		$this->modelName   = 'schools';
+		$this->routePrefix = 'admin';
 	}
 }

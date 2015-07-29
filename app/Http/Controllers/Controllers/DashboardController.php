@@ -130,12 +130,12 @@ class DashboardController extends Controller
 
     public function getUsersEdit($id)
     {
-    	return $this->motors['users']->edit($id);
+    	return $this->motors['users']->editWithRolesAndSchool($id);
     }
 
-    public function putUsersUpdate($id)
+    public function putUsersUpdate(Request $request)
     {
-    	return $this->motors['users']->update($id);
+    	return $this->motors['users']->UpdateOverriden($request);
     }
     
     public function getUsersDelete($id)

@@ -35,28 +35,42 @@ $route_partials = [
 		|Schools Motor Routes
 		|
 		*/
-		'internal_schools_routes',
+		'schools',
 
 		/*
 		|
 		|Users Motor Routes
 		|
 		*/
-		'internal_users_routes',
+		'users',
 
 		/*
 		|
 		|Teachers Motor Routes
 		|
 		*/
-		'tenant_teachers_routes',
+		'teachers',
 		
 		/*
 		|
 		|Files Motor Routes
 		|
 		*/
-		'tenant_files_routes',
+		'files',	
+
+		/*
+		|
+		| Students Motor Routes
+		|
+		*/
+		'students',
+
+		/*
+		|
+		| Classes Motor Routes
+		|
+		*/
+		'classes',
 ];
 
 
@@ -65,9 +79,6 @@ $route_partials = [
 |
 |
 | Partials Loading
-|
-|
-|
 |
 |
 |
