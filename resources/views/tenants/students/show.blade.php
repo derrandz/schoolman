@@ -8,7 +8,7 @@
                 <div class="content">
                     <div class="row">
                       <div class="col-md-4">
-                      <p>Teacher</p>
+                      <p>Students</p>
                            <div class="table-responsive">
                               <table class="table table-striped">
                                 <thead>
@@ -16,7 +16,6 @@
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Serial Code</th>
-                                    <th>Hire Date</th>
                                     <th>Birthdate</th>
                                   </tr>
                                 </thead>
@@ -26,7 +25,6 @@
                                     <td><?= $instance->first_name ?></td>
                                     <td><?= $instance->last_name ?></td>
                                     <td><?= $instance->serialcode?></td>
-                                    <td><?= $instance->hiredate ?></td>
                                     <td><?= $instance->birthdate?></td>
                                   </tr>
                                 </tbody>

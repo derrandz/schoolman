@@ -4,12 +4,12 @@
     @section('content')
         <div class="container-fluid">
             <div class="content">
-                <div class="title">Create Class</div>
+                <div class="title">Create Teacher</div>
             </div>
             <div class="content">
             {!! 
                 Form::open([
-                    'route'  => array('0' => 'schools.classes.store'),
+                    'route'  => array('0' => 'schools.students.store', 'school_id' => CurrentUserSchoolId() ),
                     'method' => 'POST',
                             ]) 
             !!}
@@ -17,21 +17,21 @@
                     {!! csrf_field() !!}
 
                     <div class="form-group">
-                        <div class="form-label"> Name </div>
-                        <input class="form-control" type="text" name="name">
+                        <div class="form-label"> First Name </div>
+                        <input class="form-control" type="text" name="first_name">
 
-                        <div class="form-label"> Year </div>
-                        <input class="form-control" type="text" name="year">
+                        <div class="form-label"> Last Name </div>
+                        <input class="form-control" type="text" name="last_name">
                     </div>
 
                     <div class="form-group">
-                        <div class="form-label"> Grade </div>
-                        <input class="form-control" type="text" name="grade">
+                        <div class="form-label"> Serial Code </div>
+                        <input class="form-control" type="text" name="serialcode">
                     </div>
 
                     <div class="form-group">
-                        <div class="form-label"> Starts_at </div>
-                        <input class="form-control" type="text" name="start_at">
+                        <div class="form-label"> Birthdate </div>
+                        <input class="form-control" type="text" name="birthdate">
                     </div>
 
                     <div class="form-group">

@@ -96,7 +96,7 @@ var model;
   @if( ActionIsCreateStudentsFromFiles() )
     model = 'students';
 
- $(document).ready(function() {
+  $(document).ready(function() {
 
 
             $("#create-"+model).submit(function(e) {

@@ -255,6 +255,6 @@ use Illuminate\Container\Container;
 
     function ActionIsCreateClassesFromFiles()
     {
-        return isThisMyAction('getCreateClassesFromFiles');
+        return isThisMyAction('getCreateSeminarsFromFiles');
     }
 

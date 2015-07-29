@@ -28,13 +28,12 @@ class SetProperDatabase
             if($school_id != -1)
             {
                 $database = getDatabasNameOfSchool($school_id);
-                $database_name =  $database->name;
+                $database_name =  $database;
 
             }
             else
             {
                 $database_name = getDatabasNameOfSchool($school_id);
-                dd($database_name);
 
             }
 

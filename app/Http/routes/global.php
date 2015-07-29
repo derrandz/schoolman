@@ -11,9 +11,9 @@
 */
 
 // root route...
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'root.auth.login',
+						  'uses' => 'Controllers\Auth\AuthController@getLogin']
+						  );
 
 Route::get('/error', function () {
 	return view('errors.503');

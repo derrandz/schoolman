@@ -52,15 +52,6 @@
                         </div>
                       </div>
 
-                      <div class="col-md-6">
-                        <div class="panel panel-info">
-                          <div class="panel panel-heading">Files</div>
-                          <div class="panel panel-body">
-                            <p>States & Links</p>
-                          </div>
-                        </div>
-                      </div>
-
 
                     </div>       
               </div>

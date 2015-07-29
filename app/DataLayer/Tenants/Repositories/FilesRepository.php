@@ -5,6 +5,7 @@ namespace App\DataLayer\Tenants\Repositories;
 use CRUDInterface;
 use File;
 use TeachersRepoInterface;
+use StudentsRepoInterface;
 use Excel;
 
 class FilesRepository implements CRUDInterface
@@ -95,7 +96,7 @@ class FilesRepository implements CRUDInterface
 
     public function seedStudentsFromFile($file_id)
     {
-        $teachersModel = new TeachersRepoInterface;
+        $studentsModel = new StudentsRepoInterface;
 
         $file = $this->find($file_id);
         $path = $file->path;
@@ -107,11 +108,11 @@ class FilesRepository implements CRUDInterface
         {
             foreach($sheets as $row)
             {
-                $teacher = $teachersModel->create([
+                $student = $studentsModel->create([
                                                     'first_name' => $row['first_name'],
                                                     'last_name'  => $row['last_name'],
                                                     'serialcode' => $row['serialcode'],
-                                                    'hiredate'   => $row['hiredate'],
+                                                    'birthdate' => $row['birthdate'],
                                                 ]);
             }
         }

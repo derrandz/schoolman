@@ -35,12 +35,18 @@ class SetCentralDatabase
         }
         else
         {
-            if(!is_null($database = getDatabasNameOfSchool($request->school_id)))
+            if( !is_null( $database = getDatabasNameOfSchool( $request->all()['school_id'] ) ) ) 
             {
                 $database_name = $database;
+                connectToDatabase(['database' => $database_name]);
+            }
+            else
+            {
+                connectToDatabase(['database' => 'central_database']);
+                flash('danger', 'could not set the database');
+                RedirectToRoute('admin.dashboard');
             }
 
-            connectToDatabase(['database' => $database_name]);
         }
 
         return $next($request);

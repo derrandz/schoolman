@@ -50,7 +50,7 @@ Route::get('{school_id}/files/create_students',[
 Route::get('{school_id}/files/create_classes',[
 
 									'as'   => 'schools.files.create_classes',
-									'uses' => 'Controllers\SchoolsManagerController@getCreateClassesFromFiles'
+									'uses' => 'Controllers\SchoolsManagerController@getCreateSeminarsFromFiles'
 	
 												]);
 

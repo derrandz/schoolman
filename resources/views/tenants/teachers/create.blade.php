@@ -9,7 +9,7 @@
             <div class="content">
             {!! 
                 Form::open([
-                    'route'  => array('0' => 'schools.teachers.store', 'school_id' => getCurrentSchoolId() ),
+                    'route'  => array('0' => 'schools.teachers.store', 'school_id' => CurrentUserSchoolId() ),
                     'method' => 'POST',
                             ]) 
             !!}

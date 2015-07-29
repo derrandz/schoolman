@@ -2,6 +2,11 @@
 @extends('layouts.main')
         
     @section('content')
+@if(ActionIsCreateClassesFromFiles())
+
+<h1>UNDER MAINTANANCE</h1>
+@else
+
     <script src="{{ URL::asset('vendor/dropzone/dist/dropzone.js') }}"></script>
     <link rel="stylesheet" href="{{asset("vendor/dropzone/dist/min/dropzone.min.css")}}" media="all">
         <div class="container-fluid">
@@ -44,10 +49,12 @@
                   <span>Start Upload</span>
                 </button>
 
-                <button data-dz-remove class="btn btn-warning cancel">
+                <a href="/admin/schoolmanager">
+                  <button data-dz-remove class="btn btn-warning cancel">
                   <i class="glyphicon glyphicon-ban-circle"></i>
                   <span>Cancel</span>
                 </button>
+                </a>
               </div>
 
                 @if( ActionIsCreateTeachersFromFiles() )
@@ -69,7 +76,7 @@
 
                    {!! Form::open(['route'=> 'schools.files.store_students',
                                       'method' => 'POST',
-                                      'id'  => 'create-teachers',
+                                      'id'  => 'create-students',
                                       'enctype' => 'multipart/form-data']) 
                     !!}
                     
@@ -84,7 +91,7 @@
 
                      {!! Form::open(['route'=> 'schools.files.store_classes',
                                       'method' => 'POST',
-                                      'id'  => 'create-teachers',
+                                      'id'  => 'create-students',
                                       'enctype' => 'multipart/form-data']) 
                     !!}
                     
@@ -101,25 +108,33 @@
                 <div id="successajax">
                 </div>
               </div>
+
+@endif
 <script>
 
 var model;
 
 @if( ActionIsCreateTeachersFromFiles() )
-  model = 'Teachers';
+  model = 'teachers';
 @else
   @if( ActionIsCreateStudentsFromFiles() )
-    model = 'Students';
+    model = 'students';
   @else
     @if( ActionIsCreateClassesFromFiles() )
-      model = 'Classes';
+      model = 'classes';
     @endif
   @endif
 @endif
 
 function showSuccessButton()
 {
-  $('#successajax').html('<p><strong style="color:green"> '+ model +' Created Successfully.</strong></p>' + '{!! Html::linkRoute("schools.teachers.index", "Next" ) !!}');
+  $('#successajax').html('<p><strong style="color:green"> '+ model +' Created Successfully.</strong></p>' + if(model == 'teachers') {
+    '{!! Html::linkRoute("schools.teachers.index", "Next" ) !!}'
+  } else if(model == 'students'){
+    '{!! Html::linkRoute("schools.students.index", "Next" ) !!}'
+  }else if(model == 'classes'){
+    '{!! Html::linkRoute("schools.classes.index", "Next" ) !!}'
+  });
 }
 </script>
 <script>

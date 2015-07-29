@@ -20,6 +20,5 @@
     	$database_repos = new DatabasesInstancesRepoInterface;
 
     	$database = $database_repos->getDatabaseInstanceBySchoolId($schoolId);
-        dd($database);
     	return $database->name;
     }

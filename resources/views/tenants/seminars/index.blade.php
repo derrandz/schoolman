@@ -4,11 +4,11 @@
 
     @section('content')
     <h1>tenants</h1>
-      <td>{!! Html::linkRoute('schools.students.create', "New student") !!}</td>
+      <td>{!! Html::linkRoute('schools.classes.create', "New class") !!}</td>
         <div class="container">
 
           @if(! count($all) )
-          <p>No student record has been made so far.</p>
+          <p>No class record has been made so far.</p>
           @else
 
           <div class="table-responsive">
@@ -23,16 +23,17 @@
               </thead>
               <tbody>
 
-                @foreach($all as $student)
+                @foreach($all as $class)
                 <tr>
-                  <td>{!! Html::linkRoute('schools.students.show', $student->id, array('id' => $student->id, 'school_id' => CurrentUserSchoolId()) ) !!}</td>
-                  <td><?= $student->first_name ?></td>
-                  <td><?= $student->last_name ?></td>
-                  <td><?= $student->serialcode ?></td>
-                  <td><?= $student->birthdate ?></td>
+                  <td>{!! Html::linkRoute('schools.classes.show', $class->id, array('id' => $class->id, 'school_id' => CurrentUserSchoolId()) ) !!}</td>
+                  <td><?= $class->first_name ?></td>
+                  <td><?= $class->last_name ?></td>
+                  <td><?= $class->serialcode ?></td>
+                  <td><?= $class->birthdate ?></td>
+                  <td><?= $class->hiredate ?></td>
                   <td>
                     {!! Form::open( array(
-                    'route' => array('schools.students.destroy', "school_id" => CurrentUserSchoolId(), "id" => $student->id )
+                    'route' => array('schools.classes.destroy', "school_id" => CurrentUserSchoolId(), "id" => $class->id )
                     , 'method' => 'DELETE')) !!}
                     {!! csrf_field() !!}
 
